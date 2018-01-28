@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
 
+import net.hockeyapp.android.CrashManager;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         dr.setCornerRadius(dr.getMinimumHeight()*2);
        // dr.setCircular(true);
         avatar.setImageDrawable(dr);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkForCrashes();
+    }
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
 
     }
 }
