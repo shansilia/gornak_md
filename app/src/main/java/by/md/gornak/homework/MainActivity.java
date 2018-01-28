@@ -33,12 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 src.getWidth(),
                 src.getWidth()
         );
-        RoundedBitmapDrawable dr =
-                RoundedBitmapDrawableFactory.create(res, src);
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
         dr.setCornerRadius(dr.getMinimumHeight()*2);
-       // dr.setCircular(true);
         avatar.setImageDrawable(dr);
-
     }
 
     @Override
