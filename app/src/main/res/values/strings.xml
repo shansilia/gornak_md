@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Homework</string>
     <string name="name">Анастасия Горнак</string>
+    <string name="hello">Hello, user!</string>
     <string name="account_url">https://github.com/shansilia</string>
+    <string name="next">Далее</string>
+    <string name="description">Домашка</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="standard_layout">Стандартный макет</string>
+    <string name="tight_layout">Плотный макет</string>
+    <string name="layout_value">Портретная: %1$s иконки в ряд \nЛандшафтная: %2$s иконок в ряд</string>
 </resources>

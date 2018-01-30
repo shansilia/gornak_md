@@ -1,5 +1,10 @@
 <resources>
     <dimen name="text_size">16dp</dimen>
-    <dimen name="normal_padding">4dp</dimen>
-    <dimen name="image_size">200dp</dimen>
+    <dimen name="normal_padding">16dp</dimen>
+    <dimen name="little_padding">8dp</dimen>
+    <dimen name="image_size">152dp</dimen>
+    <dimen name="header">20sp</dimen>
+    <dimen name="second_text">16sp</dimen>
+    <dimen name="large_font">24sp</dimen>
+    <dimen name="medium_font">14sp</dimen>
 </resources>
