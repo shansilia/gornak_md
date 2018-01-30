@@ -21,6 +21,7 @@
         android:padding="@dimen/normal_padding">
 
         <RadioButton
+            android:id="@+id/rbStandardLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/standard_layout"
@@ -28,6 +29,7 @@
             />
 
         <TextView
+            android:id="@+id/tvStandardLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/layout_value"/>
@@ -44,12 +46,14 @@
         android:padding="@dimen/normal_padding">
 
         <RadioButton
+            android:id="@+id/rbTightLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tight_layout"
             />
 
         <TextView
+            android:id="@+id/tvTightLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/layout_value"/>
