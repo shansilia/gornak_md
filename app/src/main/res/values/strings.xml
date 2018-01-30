@@ -9,5 +9,6 @@
     <string name="dark_theme">Темная тема</string>
     <string name="standard_layout">Стандартный макет</string>
     <string name="tight_layout">Плотный макет</string>
-    <string name="layout_value">Портретная: %1$s иконки в ряд \nЛандшафтная: %2$s иконок в ряд</string>
+    <string name="small_layout_value">Портретная: %1$d иконки в ряд \nЛандшафтная: %2$d иконок в ряд</string>
+    <string name="layout_value">Портретная: %1$d иконок в ряд \nЛандшафтная: %2$d иконок в ряд</string>
 </resources>

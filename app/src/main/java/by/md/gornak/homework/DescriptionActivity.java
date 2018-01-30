@@ -37,13 +37,13 @@ public class DescriptionActivity extends AppCompatActivity {
         Bitmap src = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
         src = Bitmap.createBitmap(
                 src,
-                0,
-                src.getHeight()/2 - src.getWidth()/2,
-                src.getWidth(),
-                src.getWidth()
+                (int)(src.getWidth()*0.15),
+                (int)(src.getWidth()*0.15),
+                (int)(src.getWidth()*0.7),
+                (int)(src.getWidth()*0.7)
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
-        dr.setCornerRadius(dr.getMinimumHeight()*2);
+        dr.setCircular(true);
         avatar.setImageDrawable(dr);
     }
 }
