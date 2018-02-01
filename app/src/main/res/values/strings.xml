@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Homework</string>
+    <string name="app_name">Gornak</string>
     <string name="name">Анастасия Горнак</string>
     <string name="hello">Hello, user!</string>
     <string name="account_url">https://github.com/shansilia</string>
