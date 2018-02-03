@@ -40,10 +40,10 @@ public class StartActivity extends AppCompatActivity {
         Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
         src = Bitmap.createBitmap(
                 src,
-                0,
+                src.getWidth()/5,
                 src.getHeight()/2 - src.getWidth()/2,
-                src.getWidth(),
-                src.getWidth()
+                src.getWidth()/2,
+                src.getWidth()/2
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
         dr.setCornerRadius(dr.getMinimumHeight()*2);

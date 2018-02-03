@@ -1,8 +1,13 @@
 package by.md.gornak.homework.activity;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.fragment.SettingsFragment;
@@ -32,6 +38,27 @@ public class LauncherActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        setAvatar(navigationView);
+
+    }
+
+
+    private void setAvatar(NavigationView navigationView){
+        ImageView avatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        Resources res = getResources();
+        Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
+        src = Bitmap.createBitmap(
+                src,
+                src.getWidth()/5,
+                src.getHeight()/2 - src.getWidth()/2,
+                src.getWidth()/2,
+                src.getWidth()/2
+        );
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
+        dr.setCornerRadius(dr.getMinimumHeight()*2);
+        avatar.setImageDrawable(dr);
     }
 
     @Override
