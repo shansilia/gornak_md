@@ -1,4 +1,4 @@
-package by.md.gornak.homework;
+package by.md.gornak.homework.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,12 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class DescriptionActivity extends AppCompatActivity {
+import by.md.gornak.homework.R;
+
+public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
+       // Fabric.with(this, new Crashlytics());
+        setContentView(R.layout.activity_start);
 
         setAvatar();
 
@@ -25,7 +28,7 @@ public class DescriptionActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(getBaseContext(), ThemeActivity.class);
+                final Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
                 startActivity(intent);
             }
         });
@@ -34,16 +37,16 @@ public class DescriptionActivity extends AppCompatActivity {
     private void setAvatar(){
         ImageView avatar = findViewById(R.id.avatar);
         Resources res = getResources();
-        Bitmap src = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
+        Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
         src = Bitmap.createBitmap(
                 src,
-                (int)(src.getWidth()*0.15),
-                (int)(src.getWidth()*0.15),
-                (int)(src.getWidth()*0.7),
-                (int)(src.getWidth()*0.7)
+                0,
+                src.getHeight()/2 - src.getWidth()/2,
+                src.getWidth(),
+                src.getWidth()
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
-        dr.setCircular(true);
+        dr.setCornerRadius(dr.getMinimumHeight()*2);
         avatar.setImageDrawable(dr);
     }
 }

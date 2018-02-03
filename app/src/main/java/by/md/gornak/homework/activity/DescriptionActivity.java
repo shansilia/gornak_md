@@ -1,4 +1,4 @@
-package by.md.gornak.homework;
+package by.md.gornak.homework.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,17 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.crashlytics.android.Crashlytics;
+import by.md.gornak.homework.R;
 
-import io.fabric.sdk.android.Fabric;
-
-public class StartActivity extends AppCompatActivity {
+public class DescriptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_description);
 
         setAvatar();
 
@@ -30,7 +27,7 @@ public class StartActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
+                final Intent intent = new Intent(getBaseContext(), ThemeActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,16 +36,16 @@ public class StartActivity extends AppCompatActivity {
     private void setAvatar(){
         ImageView avatar = findViewById(R.id.avatar);
         Resources res = getResources();
-        Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
+        Bitmap src = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
         src = Bitmap.createBitmap(
                 src,
-                0,
-                src.getHeight()/2 - src.getWidth()/2,
-                src.getWidth(),
-                src.getWidth()
+                (int)(src.getWidth()*0.15),
+                (int)(src.getWidth()*0.15),
+                (int)(src.getWidth()*0.7),
+                (int)(src.getWidth()*0.7)
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
-        dr.setCornerRadius(dr.getMinimumHeight()*2);
+        dr.setCircular(true);
         avatar.setImageDrawable(dr);
     }
 }

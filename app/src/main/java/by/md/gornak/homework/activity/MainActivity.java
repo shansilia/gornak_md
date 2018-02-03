@@ -1,4 +1,4 @@
-package by.md.gornak.homework;
+package by.md.gornak.homework.activity;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import net.hockeyapp.android.CrashManager;
+
+import by.md.gornak.homework.R;
 
 public class MainActivity extends AppCompatActivity {
 
