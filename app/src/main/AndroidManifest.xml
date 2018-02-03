@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_avatar_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+        <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +26,12 @@
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name=".DescriptionActivity" />
-        <activity android:name=".ThemeActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LayoutActivity" />
+        <activity android:name=".activity.DescriptionActivity" />
+        <activity android:name=".activity.ThemeActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.LayoutActivity" />
         <activity
-            android:name=".LauncherActivity"
+            android:name=".activity.LauncherActivity"
             android:label="@string/title_activity_launcher"
             android:theme="@style/AppTheme">
             <intent-filter>

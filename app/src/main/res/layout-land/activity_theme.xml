@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.md.gornak.homework.ThemeActivity">
+    tools:context="by.md.gornak.homework.activity.ThemeActivity">
 
     <LinearLayout
         android:layout_above="@+id/nextButton"
