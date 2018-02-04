@@ -28,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(getBaseContext(), DescriptionActivity.class);
+                final Intent intent = new Intent(getBaseContext(), LauncherActivity/*DescriptionActivity*/.class);
                 startActivity(intent);
             }
         });

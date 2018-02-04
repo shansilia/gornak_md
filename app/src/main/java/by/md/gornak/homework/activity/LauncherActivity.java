@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.fragment.AppGridFragment;
+import by.md.gornak.homework.fragment.AppListFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 
 public class LauncherActivity extends AppCompatActivity
@@ -39,25 +41,26 @@ public class LauncherActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         setAvatar(navigationView);
+
+        openGrid();
 
     }
 
 
-    private void setAvatar(NavigationView navigationView){
+    private void setAvatar(NavigationView navigationView) {
         ImageView avatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
         Resources res = getResources();
         Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
         src = Bitmap.createBitmap(
                 src,
-                src.getWidth()/5,
-                src.getHeight()/2 - src.getWidth()/2,
-                src.getWidth()/2,
-                src.getWidth()/2
+                src.getWidth() / 5,
+                src.getHeight() / 2 - src.getWidth() / 2,
+                src.getWidth() / 2,
+                src.getWidth() / 2
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
-        dr.setCornerRadius(dr.getMinimumHeight()*2);
+        dr.setCornerRadius(dr.getMinimumHeight() * 2);
         avatar.setImageDrawable(dr);
     }
 
@@ -91,16 +94,16 @@ public class LauncherActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
-        if (id == R.id.nav_launcher) {
-            // Handle the camera action
-        } else if (id == R.id.nav_list) {
-
-        } else if (id == R.id.nav_apps) {
-
+        if (id == R.id.nav_list) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            AppListFragment fragment = new AppListFragment();
+            transaction.replace(R.id.container, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else if (id == R.id.nav_grid) {
+            openGrid();
         } else if (id == R.id.nav_manage) {
             android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
             SettingsFragment fragment = new SettingsFragment();
@@ -112,5 +115,13 @@ public class LauncherActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openGrid() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        AppGridFragment fragment = new AppGridFragment();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
