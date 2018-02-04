@@ -30,6 +30,8 @@
         <activity android:name=".activity.ThemeActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LayoutActivity" />
+        <activity android:name=".activity.ProfileActivity"
+            android:parentActivityName=".activity.LauncherActivity"/>
         <activity
             android:name=".activity.LauncherActivity"
             android:label="@string/title_activity_launcher"
