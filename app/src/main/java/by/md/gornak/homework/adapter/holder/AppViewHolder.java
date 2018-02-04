@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.adapter.AppAdapter;
 
 public class AppViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,7 +35,7 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                mListener.onLongClick(info);
+                mListener.onLongClick(info.activityInfo.applicationInfo.packageName);
                 return true;
             }
         });
@@ -51,6 +50,7 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnAppClickListener {
         void onClick(ResolveInfo info);
-        void onLongClick(ResolveInfo info);
+
+        void onLongClick(String packageName);
     }
 }
