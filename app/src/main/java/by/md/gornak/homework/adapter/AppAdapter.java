@@ -12,29 +12,32 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.adapter.holder.AppGridViewHolder;
+import by.md.gornak.homework.adapter.holder.AppViewHolder;
 
-public class AppGridAdapter extends RecyclerView.Adapter<AppGridViewHolder> {
+public class AppAdapter extends RecyclerView.Adapter<AppViewHolder> {
 
     private List<ResolveInfo> infoList;
     private Context mContext;
     private PackageManager packageManager;
+    private boolean isGrid;
 
-    public AppGridAdapter(Context context, List<ResolveInfo> info) {
+    public AppAdapter(Context context, List<ResolveInfo> info, boolean isGrid) {
         this.infoList = info;
         mContext = context;
         packageManager = mContext.getPackageManager();
+        this.isGrid = isGrid;
     }
 
     @Override
-    public AppGridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layout = isGrid ? R.layout.item_app : R.layout.item_line_app;
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_app, parent, false);
-        return new AppGridViewHolder(v);
+                .inflate(layout, parent, false);
+        return new AppViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(AppGridViewHolder holder, int position) {
+    public void onBindViewHolder(AppViewHolder holder, int position) {
         ResolveInfo info = infoList.get(position);
         holder.getIcon().setImageDrawable(info.loadIcon(packageManager));
         holder.getName().setText(info.loadLabel(packageManager));

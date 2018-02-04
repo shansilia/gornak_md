@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import by.md.gornak.homework.R;
 
-public class AppGridViewHolder extends RecyclerView.ViewHolder {
+public class AppViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView icon;
     private TextView name;
 
-    public AppGridViewHolder(View itemView) {
+    public AppViewHolder(View itemView) {
         super(itemView);
         icon = itemView.findViewById(R.id.appImage);
         name = itemView.findViewById(R.id.appName);
