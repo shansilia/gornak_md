@@ -14,7 +14,7 @@ public class AppListFragment extends AppFragment {
     @Override
     protected void setupRecyclerView(List<ResolveInfo> pkgAppsList) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(new AppAdapter(getContext(), pkgAppsList, false));
+        mRecyclerView.setAdapter(new AppAdapter(getContext(), pkgAppsList, false, appListener));
 
     }
 }
