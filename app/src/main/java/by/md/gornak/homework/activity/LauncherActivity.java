@@ -1,5 +1,6 @@
 package by.md.gornak.homework.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
@@ -41,15 +43,17 @@ public class LauncherActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setAvatar(navigationView);
+        ImageView avatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
+
+        setAvatar(avatar);
+        setAvatarAction(avatar);
 
         openGrid();
 
     }
 
 
-    private void setAvatar(NavigationView navigationView) {
-        ImageView avatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
+    private void setAvatar(ImageView avatar) {
         Resources res = getResources();
         Bitmap src = BitmapFactory.decodeResource(res, R.drawable.avatar);
         src = Bitmap.createBitmap(
@@ -63,6 +67,20 @@ public class LauncherActivity extends AppCompatActivity
         dr.setCornerRadius(dr.getMinimumHeight() * 2);
         avatar.setImageDrawable(dr);
     }
+
+    private void setAvatarAction(ImageView avatar) {
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -123,5 +141,10 @@ public class LauncherActivity extends AppCompatActivity
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void openProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
