@@ -1,9 +1,12 @@
 package by.md.gornak.homework.fragment;
 
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -21,15 +24,18 @@ import java.util.List;
 import java.util.Map;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.adapter.AppAdapter;
 import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
 
 public abstract class AppFragment extends Fragment {
 
+    protected AppAdapter mAdapter;
     protected RecyclerView mRecyclerView;
     protected DBService dbService;
     protected Map<String, ApplicationDB> apps;
+    private List<ResolveInfo> infoList;
 
     protected AppViewHolder.OnAppClickListener appListener = new AppViewHolder.OnAppClickListener() {
         @Override
@@ -55,11 +61,37 @@ public abstract class AppFragment extends Fragment {
         }
     };
 
+    private BroadcastReceiver mMonitor = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            String action = intent.getAction();
+            String data = intent.getDataString();
+            if (action.equals(Intent.ACTION_PACKAGE_REMOVED)) {
+                removeApp(data.replace("package:", ""));
+            } else if (action.equals(Intent.ACTION_PACKAGE_ADDED)) {
+                addApp(data.replace("package:", ""));
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    };
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbService = new DBService(getContext());
         apps = dbService.readAll();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        intentFilter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+        intentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        intentFilter.addDataScheme("package");
+        getActivity().registerReceiver(mMonitor, intentFilter);
     }
 
     @Override
@@ -73,8 +105,8 @@ public abstract class AppFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_app, container, false);
         mRecyclerView = rootView.findViewById(R.id.appList);
-        List<ResolveInfo> pkgAppsList = getAppList();
-        setupRecyclerView(pkgAppsList);
+        infoList = getAppList();
+        setupRecyclerView(infoList);
         return rootView;
     }
 
@@ -114,9 +146,26 @@ public abstract class AppFragment extends Fragment {
         builder.create().show();
     }
 
-    protected void removeApp(String packageName) {
+    protected void addApp(String packageName) {
+        Intent intent = new Intent();
+        intent.setPackage(packageName);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        ResolveInfo result = getContext().getPackageManager().resolveActivity(intent, 0);
+        infoList.add(result);
+    }
+
+    protected int removeApp(String packageName) {
+        int pos = 0;
+        for (ResolveInfo info : infoList) {
+            if (info.activityInfo.applicationInfo.packageName.equals(packageName)) {
+                mAdapter.remove(info);
+                break;
+            }
+            pos++;
+        }
         apps.remove(packageName);
         dbService.remove(packageName);
+        return pos;
     }
 
     protected void openInfoApp(String packageName) {

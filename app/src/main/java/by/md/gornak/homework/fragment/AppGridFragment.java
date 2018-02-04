@@ -13,7 +13,8 @@ public class AppGridFragment extends AppFragment {
     protected void setupRecyclerView(List<ResolveInfo> pkgAppsList) {
         int numberOfColumns = 4;
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
-        mRecyclerView.setAdapter(new AppAdapter(getContext(), pkgAppsList, true, appListener));
+        mAdapter = new AppAdapter(getContext(), pkgAppsList, true, appListener);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 }

@@ -48,7 +48,7 @@ public class DBService {
     public void remove(String packageName) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         db.delete(Tables.TABLE_NAME,
-                Tables.Columns.PACKAGE + " = " + packageName,
+                Tables.Columns.PACKAGE + " = \"" + packageName + "\"",
                 null);
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,5 +50,13 @@ public class AppAdapter extends RecyclerView.Adapter<AppViewHolder> {
         return infoList.size();
     }
 
-
+    public void remove(ResolveInfo info) {
+        try {
+            int pos = infoList.indexOf(info);
+            infoList.remove(pos);
+            notifyItemRemoved(pos);
+        } catch (Exception e) {
+            Log.i("SHAD", "remove app");
+        }
+    }
 }
