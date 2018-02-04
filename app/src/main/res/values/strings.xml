@@ -19,10 +19,9 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_launcher">LauncherActivity</string>
-    <string name="navigation_launcher">Launcher Activity</string>
-    <string name="navigation_list">List Activity</string>
-    <string name="navigation_apps">Apps Activity</string>
-    <string name="navigation_settings">Settings Activity</string>
+    <string name="navigation_grid">Сетка</string>
+    <string name="navigation_list">Список</string>
+    <string name="navigation_settings">Настройки</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

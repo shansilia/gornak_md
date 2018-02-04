@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.fragment.AppGridFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 
 public class LauncherActivity extends AppCompatActivity
@@ -39,8 +40,9 @@ public class LauncherActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         setAvatar(navigationView);
+
+        openGrid();
 
     }
 
@@ -95,12 +97,10 @@ public class LauncherActivity extends AppCompatActivity
         int id = item.getItemId();
 
 
-        if (id == R.id.nav_launcher) {
-            // Handle the camera action
-        } else if (id == R.id.nav_list) {
+        if (id == R.id.nav_list) {
 
-        } else if (id == R.id.nav_apps) {
-
+        } else if (id == R.id.nav_grid) {
+            openGrid();
         } else if (id == R.id.nav_manage) {
             android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
             SettingsFragment fragment = new SettingsFragment();
@@ -112,5 +112,13 @@ public class LauncherActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openGrid(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        AppGridFragment fragment = new AppGridFragment();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
