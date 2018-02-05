@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.activity.LauncherActivity;
+import by.md.gornak.homework.activity.StartActivity;
 
 public class LayoutFragment extends Fragment {
 
@@ -31,19 +32,33 @@ public class LayoutFragment extends Fragment {
         standardText.setText(getString(R.string.small_layout_value, STANDARD, STANDARD+LAND));
         tightText.setText(getString(R.string.layout_value, TIGHT, TIGHT+LAND));
 
-        final RadioButton standard = rootView.findViewById(R.id.rbStandardLayout);
-        final RadioButton tight = rootView.findViewById(R.id.rbTightLayout);
+        final RadioButton rbStandard = rootView.findViewById(R.id.rbStandardLayout);
+        final RadioButton rbTight = rootView.findViewById(R.id.rbTightLayout);
+        final View standard = rootView.findViewById(R.id.standard);
+        final View tight = rootView.findViewById(R.id.tight);
+
         standard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tight.setChecked(false);
+                rbStandard.setChecked(true);
+                rbTight.setChecked(false);
             }
         });
 
         tight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                standard.setChecked(false);
+                rbStandard.setChecked(false);
+                rbTight.setChecked(true);
+            }
+        });
+
+        final Button next = rootView.findViewById(R.id.nextButton);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LauncherActivity.class);
+                startActivity(intent);
             }
         });
 

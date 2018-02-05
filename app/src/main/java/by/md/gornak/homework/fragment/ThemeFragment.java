@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.activity.StartActivity;
 
 
 public class ThemeFragment extends Fragment {
@@ -17,20 +18,24 @@ public class ThemeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_theme, container, false);
-        final RadioButton light = rootView.findViewById(R.id.lightThemeRb);
-        final RadioButton dark = rootView.findViewById(R.id.darkThemeRb);
+        final RadioButton rbLight = rootView.findViewById(R.id.lightThemeRb);
+        final RadioButton rbDark = rootView.findViewById(R.id.darkThemeRb);
+        final View light = rootView.findViewById(R.id.light);
+        final View dark = rootView.findViewById(R.id.dark);
 
         light.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dark.setChecked(false);
+                rbLight.setChecked(true);
+                rbDark.setChecked(false);
             }
         });
 
         dark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                light.setChecked(false);
+                rbLight.setChecked(false);
+                rbDark.setChecked(true);
             }
         });
         return rootView;

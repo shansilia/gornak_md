@@ -5,10 +5,11 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/light"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/normal_padding">
+        style="@style/BorderLayout">
 
         <RadioButton
             android:id="@+id/lightThemeRb"
@@ -16,16 +17,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/light_theme"
+            android:checked="true"
             />
 
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/dark"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/dark_gray"
-        android:layout_margin="@dimen/normal_padding">
+        style="@style/BorderLayout">
 
         <RadioButton
             android:id="@+id/darkThemeRb"
@@ -33,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/dark_theme"
-            android:checked="true"
             />
 
     </FrameLayout>

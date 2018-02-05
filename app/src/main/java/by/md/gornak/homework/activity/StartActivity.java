@@ -1,5 +1,6 @@
 package by.md.gornak.homework.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -67,5 +68,11 @@ public class StartActivity extends AppCompatActivity {
             rgPage.addView(rb);
             rbPage.add(rb);
         }
+    }
+
+    public void updateTheme() {
+        Intent intent = new Intent(this, StartActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
