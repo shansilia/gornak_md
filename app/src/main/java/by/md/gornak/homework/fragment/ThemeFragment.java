@@ -9,35 +9,53 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.activity.StartActivity;
+import by.md.gornak.homework.util.Settings;
 
 
 public class ThemeFragment extends Fragment {
+
+    private RadioButton rbLight;
+    private RadioButton rbDark;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_theme, container, false);
-        final RadioButton rbLight = rootView.findViewById(R.id.lightThemeRb);
-        final RadioButton rbDark = rootView.findViewById(R.id.darkThemeRb);
+
+        boolean isLight = Boolean.parseBoolean(Settings.getStringValue(getContext(), R.string.pref_key_light_theme));
+        rbLight = rootView.findViewById(R.id.lightThemeRb);
+        rbDark = rootView.findViewById(R.id.darkThemeRb);
+        rbLight.setChecked(isLight);
+        rbDark.setChecked(!isLight);
+        setAction(rootView);
+
+        return rootView;
+    }
+
+    private void setAction(View rootView) {
         final View light = rootView.findViewById(R.id.light);
         final View dark = rootView.findViewById(R.id.dark);
 
-        light.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rbLight.setChecked(true);
-                rbDark.setChecked(false);
-            }
-        });
+        light.setOnClickListener(new ThemeClickListener(true));
+        dark.setOnClickListener(new ThemeClickListener(false));
+        rbLight.setOnClickListener(new ThemeClickListener(true));
+        rbDark.setOnClickListener(new ThemeClickListener(false));
+    }
 
-        dark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rbLight.setChecked(false);
-                rbDark.setChecked(true);
-            }
-        });
-        return rootView;
+    class ThemeClickListener implements View.OnClickListener {
+
+        private boolean isLight;
+
+        ThemeClickListener(boolean isLight) {
+            this.isLight = isLight;
+        }
+
+        @Override
+        public void onClick(View view) {
+            rbLight.setChecked(isLight);
+            rbDark.setChecked(!isLight);
+            Settings.setStringValue(getContext(), R.string.pref_key_light_theme, String.valueOf(isLight));
+
+        }
     }
 }

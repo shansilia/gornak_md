@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.activity.LauncherActivity;
-import by.md.gornak.homework.activity.StartActivity;
+import by.md.gornak.homework.util.Settings;
 
 public class LayoutFragment extends Fragment {
 
+    private RadioButton rbStandard;
+    private RadioButton rbTight;
 
     private static final int STANDARD = 4;
     private static final int TIGHT = 5;
@@ -27,31 +29,33 @@ public class LayoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
+
+        int defaultLayout = Integer.parseInt(Settings.getStringValue(getContext(), R.string.pref_key_layout));
+
         final TextView standardText = rootView.findViewById(R.id.tvStandardLayout);
         final TextView tightText = rootView.findViewById(R.id.tvTightLayout);
-        standardText.setText(getString(R.string.small_layout_value, STANDARD, STANDARD+LAND));
-        tightText.setText(getString(R.string.layout_value, TIGHT, TIGHT+LAND));
+        standardText.setText(getString(R.string.small_layout_value, STANDARD, STANDARD + LAND));
+        tightText.setText(getString(R.string.layout_value, TIGHT, TIGHT + LAND));
 
-        final RadioButton rbStandard = rootView.findViewById(R.id.rbStandardLayout);
-        final RadioButton rbTight = rootView.findViewById(R.id.rbTightLayout);
+        rbStandard = rootView.findViewById(R.id.rbStandardLayout);
+        rbTight = rootView.findViewById(R.id.rbTightLayout);
+
+        rbStandard.setChecked(defaultLayout == STANDARD);
+        rbTight.setChecked(defaultLayout != STANDARD);
+
+        setAction(rootView);
+
+        return rootView;
+    }
+
+    private void setAction(View rootView) {
         final View standard = rootView.findViewById(R.id.standard);
         final View tight = rootView.findViewById(R.id.tight);
 
-        standard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rbStandard.setChecked(true);
-                rbTight.setChecked(false);
-            }
-        });
-
-        tight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rbStandard.setChecked(false);
-                rbTight.setChecked(true);
-            }
-        });
+        standard.setOnClickListener(new LayoutClickListener(STANDARD));
+        tight.setOnClickListener(new LayoutClickListener(TIGHT));
+        rbStandard.setOnClickListener(new LayoutClickListener(STANDARD));
+        rbTight.setOnClickListener(new LayoutClickListener(TIGHT));
 
         final Button next = rootView.findViewById(R.id.nextButton);
         next.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +65,22 @@ public class LayoutFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
 
-        return rootView;
+    class LayoutClickListener implements View.OnClickListener {
+
+        private int size;
+
+        LayoutClickListener(int size) {
+            this.size = size;
+        }
+
+        @Override
+        public void onClick(View view) {
+            rbStandard.setChecked(size == STANDARD);
+            rbTight.setChecked(size != STANDARD);
+            Settings.setStringValue(getContext(), R.string.pref_key_layout, String.valueOf(size));
+            Settings.setBooleanValue(getContext(), R.string.pref_key_show_welcome, false);
+        }
     }
 }

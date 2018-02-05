@@ -26,16 +26,16 @@ public class HelloFragment extends Fragment {
         return rootView;
     }
 
-    private void setAvatar(View rootView){
+    private void setAvatar(View rootView) {
         ImageView avatar = rootView.findViewById(R.id.avatar);
         Resources res = getResources();
         Bitmap src = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
         src = Bitmap.createBitmap(
                 src,
-                (int)(src.getWidth()*0.15),
-                (int)(src.getWidth()*0.15),
-                (int)(src.getWidth()*0.7),
-                (int)(src.getWidth()*0.7)
+                (int) (src.getWidth() * 0.15),
+                (int) (src.getWidth() * 0.15),
+                (int) (src.getWidth() * 0.7),
+                (int) (src.getWidth() * 0.7)
         );
         RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
         dr.setCircular(true);

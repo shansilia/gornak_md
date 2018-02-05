@@ -2,6 +2,7 @@ package by.md.gornak.homework.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.HelloPageAdapter;
+import by.md.gornak.homework.util.Settings;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -22,6 +24,19 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
+            super.onCreate(savedInstanceState);
+            final Intent intent = new Intent(this, LauncherActivity.class);
+            startActivity(intent);
+            return;
+        }
+
+        if (Settings.getBooleanValue(this, R.string.pref_key_first_start, true)) {
+            PreferenceManager.setDefaultValues(this, R.xml.pref, false);
+            Settings.setBooleanValue(this, R.string.pref_key_first_start, false);
+        }
+        setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
+                R.style.AppTheme : R.style.DarkAppTheme);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start);

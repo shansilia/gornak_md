@@ -23,12 +23,15 @@ import by.md.gornak.homework.R;
 import by.md.gornak.homework.fragment.AppGridFragment;
 import by.md.gornak.homework.fragment.AppListFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
+import by.md.gornak.homework.util.Settings;
 
 public class LauncherActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
+                R.style.AppTheme : R.style.DarkAppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -79,7 +82,6 @@ public class LauncherActivity extends AppCompatActivity
             }
         });
     }
-
 
 
     @Override
