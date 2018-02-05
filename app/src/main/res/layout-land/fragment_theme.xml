@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.md.gornak.homework.activity.ThemeActivity"
-    android:orientation="vertical">
+    tools:context="by.md.gornak.homework.activity.ThemeActivity">
+
+    <LinearLayout
+        android:layout_above="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/normal_padding">
+        style="@style/BorderLayout"
+        android:layout_margin="@dimen/normal_padding">
 
         <RadioButton
             android:id="@+id/lightThemeRb"
@@ -19,16 +25,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/light_theme"
+            android:checked="true"
             />
 
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/dark_gray"
-        android:layout_margin="@dimen/normal_padding">
+        style="@style/BorderLayout">
 
         <RadioButton
             android:id="@+id/darkThemeRb"
@@ -36,16 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/dark_theme"
-            android:checked="true"
             />
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/NextButton"/>
+    </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

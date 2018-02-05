@@ -26,9 +26,6 @@
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name=".activity.DescriptionActivity" />
-        <activity android:name=".activity.ThemeActivity" />
-        <activity android:name=".activity.LayoutActivity" />
         <activity android:name=".activity.ProfileActivity"
             android:parentActivityName=".activity.LauncherActivity"/>
         <activity

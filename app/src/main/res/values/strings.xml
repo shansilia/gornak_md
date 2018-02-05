@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Gornak</string>
     <string name="name">Анастасия Горнак</string>
-    <string name="hello">Hello, user!</string>
+    <string name="hello">приветствует Вас!</string>
     <string name="account_url">https://github.com/shansilia</string>
     <string name="next">Далее</string>
     <string name="description">Домашка</string>

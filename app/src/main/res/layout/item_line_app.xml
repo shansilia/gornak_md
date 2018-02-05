@@ -23,7 +23,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/appImage"
         android:layout_toEndOf="@id/appImage"
-        android:background="#ff0000" />
+        android:background="@color/colorAccent" />
 
 
 </RelativeLayout>

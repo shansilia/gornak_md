@@ -1,40 +1,33 @@
-package by.md.gornak.homework.activity;
+package by.md.gornak.homework.fragment;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
 
-public class DescriptionActivity extends AppCompatActivity {
 
+public class HelloFragment extends Fragment {
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
-
-        setAvatar();
-
-        final Button next = findViewById(R.id.nextButton);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Intent intent = new Intent(getBaseContext(), ThemeActivity.class);
-                startActivity(intent);
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_hello, container, false);
+        setAvatar(rootView);
+        return rootView;
     }
 
-    private void setAvatar(){
-        ImageView avatar = findViewById(R.id.avatar);
+    private void setAvatar(View rootView){
+        ImageView avatar = rootView.findViewById(R.id.avatar);
         Resources res = getResources();
         Bitmap src = BitmapFactory.decodeResource(res, R.mipmap.ic_launcher);
         src = Bitmap.createBitmap(
