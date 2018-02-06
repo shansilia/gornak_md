@@ -8,12 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.HelloPageAdapter;
 import by.md.gornak.homework.util.Settings;
+import io.fabric.sdk.android.Fabric;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -27,13 +30,14 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
-//            super.onCreate(savedInstanceState);
-//            final Intent intent = new Intent(this, LauncherActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//            return;
-//        }
+        Fabric.with(this, new Crashlytics());
+        if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
+            super.onCreate(savedInstanceState);
+            final Intent intent = new Intent(this, LauncherActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return;
+        }
 
         if (Settings.getBooleanValue(this, R.string.pref_key_first_start, true)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref, false);
@@ -44,7 +48,6 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start);
-        // Fabric.with(this, new Crashlytics());
         applyPager();
 
         if(savedInstanceState != null) {
