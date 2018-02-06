@@ -1,0 +1,58 @@
+<resources>
+    <string name="name">أنستسيا غورناك</string>
+    <string name="hello"> يرحب بكم!</string>
+    <string name="next">الانتقال إلى التطبيق</string>
+    <string name="light_theme">مظهر خفيف</string>
+    <string name="dark_theme">مظهر مظلم</string>
+    <string name="standard_layout">التخطيط القياسي</string>
+    <string name="tight_layout">تخطيط سميك</string>
+    <string name="small_layout_value">صورة: %1$d الأيقونات في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="layout_value">صورة: %1$d من الرموز في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="ok">حسنا</string>
+
+    <string name="navigation_grid">الشبكة</string>
+    <string name="navigation_list">قائمة</string>
+    <string name="navigation_settings">الإعدادات</string>
+
+    <string name="app_dialog_title">الخطوة التالية</string>
+    <string-array name="app_dialog_action">
+        <item>حذف</item>
+        <item>فريكونسي: </item>
+        <item>إنفورماتيون</item>
+    </string-array>
+
+    <string name="attention">تحذير!</string>
+    <string name="exit_warning_text">هل تريد بالتأكيد الخروج من التطبيق؟</string>
+    <string name="cancel">إلغاء</string>
+
+    <string name="address">مينسك</string>
+
+    <!-- Settings -->
+
+    <string name="pref_header_ui">المظاهر والشبكة الإعلانية</string>
+    <string name="pref_header_app">التطبيقات</string>
+
+    <string name="pref_title_favorite_size">عدد التطبيقات في المفضلة</string>
+    <string name="pref_title_theme">الموضوع</string>
+    <string name="pref_title_layout">تخطيط</string>
+    <string name="pref_title_behavior_remove">سلوك الإزالة</string>
+    <string name="pref_title_sorting">طريقة التصنيف</string>
+    <string name="pref_title_favorite">في المفضلة</string>
+    <string name="pref_title_favorite_time">الأكثر استخداما لآخر</string>
+
+    <string-array name="pref_arr_behavior_remove">
+        <item>ديسبلاسيمنت تو a فاكانت سيت</item>
+        <item>ترك مكان العنصر مجاني</item>
+    </string-array>
+
+    <string name="pref_title_welcome_enable">إظهار صفحة الترحيب في المرة التالية التي تبدأ فيها</string>
+
+    <string-array name="pref_arr_sorting">
+        <item>فرز حسب تاريخ التثبيت</item>
+        <item>الترتيب حسب الترتيب الأبجدي (A-Z)</item>
+        <item>الترتيب حسب الترتيب الأبجدي (Z-A)</item>
+        <item>عدد مرات البدء</item>
+        <item>لا فرز</item>
+    </string-array>
+
+</resources>

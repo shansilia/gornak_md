@@ -47,7 +47,17 @@ public class StartActivity extends AppCompatActivity {
         // Fabric.with(this, new Crashlytics());
         applyPager();
 
-        vpHello.setCurrentItem(getIntent().getIntExtra(START_ITEM, 0));
+        if(savedInstanceState != null) {
+            vpHello.setCurrentItem(savedInstanceState.getInt(START_ITEM, 0));
+        }else {
+            vpHello.setCurrentItem(getIntent().getIntExtra(START_ITEM, 0));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(START_ITEM, vpHello.getCurrentItem());
     }
 
     private void applyPager() {
@@ -89,11 +99,5 @@ public class StartActivity extends AppCompatActivity {
             rgPage.addView(rb);
             rbPage.add(rb);
         }
-    }
-
-    public void updateTheme() {
-        Intent intent = new Intent(this, StartActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
