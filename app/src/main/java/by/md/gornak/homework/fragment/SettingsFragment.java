@@ -43,6 +43,7 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         addPreferencesFromResource(R.xml.pref);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         listener = new SharedPreferences.OnSharedPreferenceChangeListener() {

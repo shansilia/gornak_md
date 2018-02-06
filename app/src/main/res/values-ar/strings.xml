@@ -6,8 +6,9 @@
     <string name="dark_theme">مظهر مظلم</string>
     <string name="standard_layout">التخطيط القياسي</string>
     <string name="tight_layout">تخطيط سميك</string>
-    <string name="small_layout_value">صورة: ٪1$d الأيقونات في صف\nلاندكيب: ٪2$d من الرموز في صف</string>
-    <string name="layout_value">صورة: ٪1$ من الرموز في صف\nلاندكيب: ٪2$d من الرموز في صف</string>
+    <string name="small_layout_value">صورة: %1$d الأيقونات في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="layout_value">صورة: %1$d من الرموز في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="ok">حسنا</string>
 
     <string name="navigation_grid">الشبكة</string>
     <string name="navigation_list">قائمة</string>

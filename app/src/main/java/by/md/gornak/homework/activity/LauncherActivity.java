@@ -55,10 +55,10 @@ public class LauncherActivity extends AppCompatActivity
         setAvatar(avatar);
         setAvatarAction(avatar);
 
-        if (!getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
-            openGrid();
-        } else {
+        if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
             openSettings();
+        } else if(getSupportFragmentManager().getFragments().isEmpty()){
+            openGrid();
         }
 
     }
