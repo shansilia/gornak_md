@@ -1,5 +1,6 @@
 package by.md.gornak.homework.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.activity.LauncherActivity;
+import by.md.gornak.homework.activity.StartActivity;
 import by.md.gornak.homework.util.Settings;
 
 
@@ -55,7 +58,10 @@ public class ThemeFragment extends Fragment {
             rbLight.setChecked(isLight);
             rbDark.setChecked(!isLight);
             Settings.setStringValue(getContext(), R.string.pref_key_light_theme, String.valueOf(isLight));
-
+            getActivity().finish();
+            final Intent intent = getActivity().getIntent();
+            intent.putExtra(StartActivity.START_ITEM, 1);
+            getActivity().startActivity(intent);
         }
     }
 }

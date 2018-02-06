@@ -17,6 +17,9 @@ import by.md.gornak.homework.util.Settings;
 
 public class StartActivity extends AppCompatActivity {
 
+
+    public static final String START_ITEM = "startItem";
+
     private ViewPager vpHello;
     private HelloPageAdapter mAdapter;
     private List<RadioButton> rbPage;
@@ -24,12 +27,13 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
-            super.onCreate(savedInstanceState);
-            final Intent intent = new Intent(this, LauncherActivity.class);
-            startActivity(intent);
-            return;
-        }
+//        if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
+//            super.onCreate(savedInstanceState);
+//            final Intent intent = new Intent(this, LauncherActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            return;
+//        }
 
         if (Settings.getBooleanValue(this, R.string.pref_key_first_start, true)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref, false);
@@ -42,6 +46,8 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         // Fabric.with(this, new Crashlytics());
         applyPager();
+
+        vpHello.setCurrentItem(getIntent().getIntExtra(START_ITEM, 0));
     }
 
     private void applyPager() {

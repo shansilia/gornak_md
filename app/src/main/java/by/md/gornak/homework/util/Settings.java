@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import by.md.gornak.homework.R;
 
 public class Settings {
-    private static SharedPreferences getSharedPreferences(Context context) {
+    public static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE);
     }
 

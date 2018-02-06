@@ -72,8 +72,8 @@
         <item>Сортировка по дате установки</item>
         <item>Сортировка в алфавитном порядке(A-Z)</item>
         <item>Сортировка в алфавитном порядке(Z-A)</item>
-        <item>Отсутствие сортировки</item>
         <item>По количеству запусков</item>
+        <item>Отсутствие сортировки</item>
     </string-array>
 
     <string name="pref_key_favourite">isLastFavourite</string>
@@ -110,7 +110,7 @@
     <string name="pref_size_layout_def">4</string>
     <string-array name="pref_size_layout_list_values">
         <item>4</item>
-        <item>6</item>
+        <item>5</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->
@@ -153,5 +153,8 @@
     <string name="pref_key_light_theme">isLightTheme</string>
     <string name="pref_key_sorting">sorting</string>
     <string name="pref_key_first_start">isFirstStart</string>
+    <string name="attention">Внимание!</string>
+    <string name="exit_warning_text">Вы точно хотите выйти из приложения?</string>
+    <string name="cancel">Отмена</string>
 
 </resources>
