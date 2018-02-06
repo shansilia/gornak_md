@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Gornak</string>
+    <string name="name">Анастасия Горнак</string>
+    <string name="hello">приветствует Вас!</string>
+    <string name="next">Перейти к приложению</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="standard_layout">Стандартный макет</string>
+    <string name="tight_layout">Плотный макет</string>
+    <string name="small_layout_value">Портретная: %1$d иконки в ряд \nЛандшафтная: %2$d иконок в ряд</string>
+    <string name="layout_value">Портретная: %1$d иконок в ряд \nЛандшафтная: %2$d иконок в ряд</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_grid">Сетка</string>
+    <string name="navigation_list">Список</string>
+    <string name="navigation_settings">Настройки</string>
+
+    <string name="app_dialog_title">Дальнейшее действие</string>
+    <string-array name="app_dialog_action">
+        <item>Удалить</item>
+        <item>Частота: </item>
+        <item>Информация</item>
+    </string-array>
+
+    <string name="attention">Внимание!</string>
+    <string name="exit_warning_text">Вы точно хотите выйти из приложения?</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="phone">+375 29 207 22 04</string>
+    <string name="mail">shansiliya@yandex.ru</string>
+    <string name="vk">https://vk.com/shansilia</string>
+    <string name="address">г. Минск</string>
+    <string name="github">https://github.com/shansilia</string>
+
+    <!-- Settings -->
+
+    <string name="pref_header_ui">Темы и отображение</string>
+    <string name="pref_header_app">Приложения</string>
+
+    <string name="pref_title_theme">Тема</string>
+    <string name="pref_title_layout">Макет</string>
+    <string name="pref_title_sorting">Метод сортировки</string>
+
+    <string-array name="pref_arr_behavior_remove">
+        <item>Смещение на освободившееся место</item>
+        <item>Оставление местаудоленного элемента свободным</item>
+    </string-array>
+
+    <string name="pref_title_welcome_enable">Показать welcome-page при следующем запуске</string>
+
+    <string-array name="pref_arr_sorting">
+        <item>Сортировка по дате установки</item>
+        <item>Сортировка в алфавитном порядке(А-Я)</item>
+        <item>Сортировка в алфавитном порядке(Я-А)</item>
+        <item>По количеству запусков</item>
+        <item>Отсутствие сортировки</item>
+    </string-array>
+
+    <string-array name="pref_arr_theme">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+
+    <string-array name="pref_arr_layout">
+        <item>@string/standard_layout</item>
+        <item>@string/tight_layout</item>
+    </string-array>
+
+    <integer-array name="pref_arr_favorite_size">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </integer-array>
+
+    <bool name="pref_true">true</bool>
+    <string-array name="pref_list_values">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+    <string name="pref_size_layout_def">4</string>
+    <string-array name="pref_size_layout_list_values">
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <integer-array name="list_pref_time_values">
+        <item>1</item>
+        <item>6</item>
+        <item>24</item>
+        <item>168</item>
+    </integer-array>
+
+    <string name="pref_sort_def">0</string>
+    <string-array name="list_pref_sort_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="shared_preferences">by.md.gornak.homework_preferences</string>
+    <string name="pref_key_show_welcome">isShowWelcomePage</string>
+    <string name="pref_key_layout">isStandardLayout</string>
+    <string name="pref_key_light_theme">isLightTheme</string>
+    <string name="pref_key_sorting">sorting</string>
+    <string name="pref_key_first_start">isFirstStart</string>
+
+</resources>

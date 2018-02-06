@@ -1,5 +1,101 @@
 <resources>
-    <string name="app_name">Homework</string>
-    <string name="name">Анастасия Горнак</string>
-    <string name="account_url">https://github.com/shansilia</string>
+    <string name="app_name">Gornak</string>
+    <string name="name">Anastasia Gornak</string>
+    <string name="hello">greets you!</string>
+    <string name="next">Go to application</string>
+
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="standard_layout">Standard layout</string>
+    <string name="tight_layout">Thick layout</string>
+    <string name="small_layout_value">Portrait: %1$d icons in a row\nLandscape: %2$d icons in a row</string>
+    <string name="layout_value">Portrait: %1$d icons in a row\nLandscape: %2$d icons in a row</string>
+    <string name="ok">OK</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_grid">Grid</string>
+    <string name="navigation_list">List</string>
+    <string name="navigation_settings">Settings</string>
+
+    <string name="app_dialog_title">Next step</string>
+    <string-array name="app_dialog_action">
+        <item>Delete</item>
+        <item>Frequency: </item>
+        <item>Information</item>
+    </string-array>
+
+    <string name="attention">Warning!</string>
+    <string name="exit_warning_text">Are you sure you want to exit the application? </string>
+    <string name="cancel">Cancel</string>
+
+    <string name="phone">+375 29 207 22 04</string>
+    <string name="mail">shansiliya@yandex.ru</string>
+    <string name="vk">https://vk.com/shansilia</string>
+    <string name="address">Minsk</string>
+    <string name="github">https://github.com/shansilia</string>
+
+    <!-- Settings -->
+
+    <string name="pref_header_ui">Themes and display</string>
+    <string name="pref_header_app">Applications</string>
+
+    <string name="pref_title_theme">Theme</string>
+    <string name="pref_title_layout">Layout</string>
+    <string name="pref_title_sorting">Sorting method</string>
+
+    <string-array name="pref_arr_behavior_remove">
+        <item>Displacement to a vacant seat</item>
+        <item>Leaving the place of the element is free</item>
+    </string-array>
+
+    <string name="pref_title_welcome_enable">Show welcome-page the next time it is started</string>
+
+    <string-array name="pref_arr_sorting">
+        <item>Sort by installation date</item>
+        <item>Sorting in alphabetical order (A-Z)</item>
+        <item>Sorting in alphabetical order (Z-A)</item>
+        <item>Number of starts</item>
+        <item>No sorting</item>
+    </string-array>
+
+    <string-array name="pref_arr_theme">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+
+    <string-array name="pref_arr_layout">
+        <item>@string/standard_layout</item>
+        <item>@string/tight_layout</item>
+    </string-array>
+
+    <bool name="pref_true">true</bool>
+    <string-array name="pref_list_values">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+    <string name="pref_size_layout_def">4</string>
+    <string-array name="pref_size_layout_list_values">
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="pref_sort_def">0</string>
+    <string-array name="list_pref_sort_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="shared_preferences">by.md.gornak.homework_preferences</string>
+    <string name="pref_key_show_welcome">isShowWelcomePage</string>
+    <string name="pref_key_layout">isStandardLayout</string>
+    <string name="pref_key_light_theme">isLightTheme</string>
+    <string name="pref_key_sorting">sorting</string>
+    <string name="pref_key_first_start">isFirstStart</string>
+
 </resources>

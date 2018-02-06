@@ -1,0 +1,77 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="uiSetting"
+        android:title="@string/pref_header_ui">
+        //темная светлая тема
+        <ListPreference
+            android:defaultValue="@bool/pref_true"
+            android:entries="@array/pref_arr_theme"
+            android:entryValues="@array/pref_list_values"
+            android:key="@string/pref_key_light_theme"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@string/ok"
+            android:title="@string/pref_title_theme" />
+        <!--//макет 4 - 6-->
+        <ListPreference
+            android:defaultValue="@string/pref_size_layout_def"
+            android:entries="@array/pref_arr_layout"
+            android:entryValues="@array/pref_size_layout_list_values"
+            android:key="@string/pref_key_layout"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@string/ok"
+            android:title="@string/pref_title_layout" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="appSetting"
+        android:title="@string/pref_header_app">
+        //Показать welcome-page при следующем запуске
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_show_welcome"
+            android:singleLineTitle="false"
+            android:title="@string/pref_title_welcome_enable" />
+        <!--//сортировка по дате установки/количество запусков/сортировка в алфавитном порядке(сортировать-->
+        <!--A-Z или Z-A)/отсутствие сортировки-->
+        <ListPreference
+            android:defaultValue="@string/pref_sort_def"
+            android:entries="@array/pref_arr_sorting"
+            android:entryValues="@array/list_pref_sort_values"
+            android:key="@string/pref_key_sorting"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@string/ok"
+            android:title="@string/pref_title_sorting" />
+        //последние запущенные приложения, либо приложения, которые пользователь чаще всего запускал
+        за
+        последний час/6 часов/12 часов/сутки/неделю
+        <!--<ListPreference-->
+        <!--android:defaultValue="true"-->
+        <!--android:entries="@array/pref_arr_favorite"-->
+        <!--android:entryValues="@array/pref_boolean_list_values"-->
+        <!--android:key="@string/pref_key_favourite"-->
+        <!--android:negativeButtonText="@null"-->
+        <!--android:positiveButtonText="@string/ok"-->
+        <!--android:title="@string/pref_title_favorite" />-->
+        <!--<ListPreference-->
+        <!--android:defaultValue="24"-->
+        <!--android:entries="@array/pref_arr_favorite_time"-->
+        <!--android:entryValues="@array/list_pref_time_values"-->
+        <!--android:key="@string/pref_key_favourite_time"-->
+        <!--android:negativeButtonText="@null"-->
+        <!--android:positiveButtonText="@string/ok"-->
+        <!--android:enabled="false"-->
+        <!--android:title="@string/pref_title_favorite_time" />-->
+        <!--//управления размером области популярных приложений (из предыдущего пункта задания) из настроек.-->
+        <!--<ListPreference-->
+        <!--android:defaultValue="1"-->
+        <!--android:entries="@array/pref_arr_favorite_size"-->
+        <!--android:entryValues="@array/pref_arr_favorite_size"-->
+        <!--android:key="popular_size"-->
+        <!--android:negativeButtonText="@null"-->
+        <!--android:positiveButtonText="@string/ok"-->
+        <!--android:title="@string/pref_title_favorite_size" />-->
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

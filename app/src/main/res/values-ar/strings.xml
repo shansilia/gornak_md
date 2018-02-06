@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">Gornak</string>
+    <string name="name">أنستسيا غورناك</string>
+    <string name="hello"> يرحب بكم!</string>
+    <string name="next">الانتقال إلى التطبيق</string>
+    <string name="light_theme">مظهر خفيف</string>
+    <string name="dark_theme">مظهر مظلم</string>
+    <string name="standard_layout">التخطيط القياسي</string>
+    <string name="tight_layout">تخطيط سميك</string>
+    <string name="small_layout_value">صورة: %1$d الأيقونات في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="layout_value">صورة: %1$d من الرموز في صف\nلاندكيب: %2$d من الرموز في صف</string>
+    <string name="ok">حسنا</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_grid">الشبكة</string>
+    <string name="navigation_list">قائمة</string>
+    <string name="navigation_settings">الإعدادات</string>
+
+    <string name="app_dialog_title">الخطوة التالية</string>
+    <string-array name="app_dialog_action">
+        <item>حذف</item>
+        <item>فريكونسي: </item>
+        <item>إنفورماتيون</item>
+    </string-array>
+
+    <string name="attention">تحذير!</string>
+    <string name="exit_warning_text">هل تريد بالتأكيد الخروج من التطبيق؟</string>
+    <string name="cancel">إلغاء</string>
+
+    <string name="phone">+375 29 207 22 04</string>
+    <string name="mail">shansiliya@yandex.ru</string>
+    <string name="vk">https://vk.com/shansilia</string>
+    <string name="address">مينسك</string>
+    <string name="github">https://github.com/shansilia</string>
+
+    <!-- Settings -->
+
+    <string name="pref_header_ui">المظاهر والشبكة الإعلانية</string>
+    <string name="pref_header_app">التطبيقات</string>
+
+    <string name="pref_title_theme">الموضوع</string>
+    <string name="pref_title_layout">تخطيط</string>
+    <string name="pref_title_sorting">طريقة التصنيف</string>
+
+    <string-array name="pref_arr_behavior_remove">
+        <item>ديسبلاسيمنت تو a فاكانت سيت</item>
+        <item>ترك مكان العنصر مجاني</item>
+    </string-array>
+
+    <string name="pref_title_welcome_enable">إظهار صفحة الترحيب في المرة التالية التي تبدأ فيها</string>
+
+    <string-array name="pref_arr_sorting">
+        <item>فرز حسب تاريخ التثبيت</item>
+        <item>الترتيب حسب الترتيب الأبجدي (A-Z)</item>
+        <item>الترتيب حسب الترتيب الأبجدي (Z-A)</item>
+        <item>عدد مرات البدء</item>
+        <item>لا فرز</item>
+    </string-array>
+
+    <string-array name="pref_arr_theme">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+
+    <string-array name="pref_arr_layout">
+        <item>@string/standard_layout</item>
+        <item>@string/tight_layout</item>
+    </string-array>
+
+    <integer-array name="pref_arr_favorite_size">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </integer-array>
+
+    <bool name="pref_true">true</bool>
+    <string-array name="pref_list_values">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+    <string name="pref_size_layout_def">4</string>
+    <string-array name="pref_size_layout_list_values">
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="pref_sort_def">0</string>
+    <string-array name="list_pref_sort_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="shared_preferences">by.md.gornak.homework_preferences</string>
+    <string name="pref_key_show_welcome">isShowWelcomePage</string>
+    <string name="pref_key_layout">isStandardLayout</string>
+    <string name="pref_key_light_theme">isLightTheme</string>
+    <string name="pref_key_sorting">sorting</string>
+    <string name="pref_key_first_start">isFirstStart</string>
+
+</resources>
