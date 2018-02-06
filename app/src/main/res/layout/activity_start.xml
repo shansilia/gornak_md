@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="by.md.gornak.homework.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpHello"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rgPage"/>
+
+    <RadioGroup
+        android:id="@+id/rgPage"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="@dimen/image_size"
-            android:layout_height="@dimen/image_size"
-            android:layout_margin="@dimen/normal_padding"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/normal_padding"
-            android:text="@string/app_name"
-            android:textSize="@dimen/header" />
-
-        <TextView
-            style="@style/SecondText"
-            android:text="@string/hello" />
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        style="@style/NextButton" />
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal|bottom"
+        android:layout_margin="@dimen/large_font"
+        android:orientation="horizontal" />
 
 </RelativeLayout>

@@ -13,13 +13,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.util.Settings;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ImageView avatar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
+                R.style.AppTheme : R.style.DarkAppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -35,8 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                onBackPressed();
+            onBackPressed();
             }
         });
     }

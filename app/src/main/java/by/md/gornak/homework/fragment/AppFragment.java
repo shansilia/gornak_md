@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import by.md.gornak.homework.adapter.AppAdapter;
 import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
+import by.md.gornak.homework.util.Sorting;
 
 public abstract class AppFragment extends Fragment {
 
@@ -106,6 +108,7 @@ public abstract class AppFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_app, container, false);
         mRecyclerView = rootView.findViewById(R.id.appList);
         infoList = getAppList();
+        Collections.sort(infoList, Sorting.getComparable(getContext()));
         setupRecyclerView(infoList);
         return rootView;
     }

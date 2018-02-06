@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Gornak</string>
     <string name="name">Анастасия Горнак</string>
-    <string name="hello">Hello, user!</string>
+    <string name="hello">приветствует Вас!</string>
     <string name="account_url">https://github.com/shansilia</string>
-    <string name="next">Далее</string>
+    <string name="next">Перейти к приложению</string>
     <string name="description">Домашка</string>
     <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Темная тема</string>
@@ -33,6 +33,8 @@
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
+
+
     <string name="pref_header_ui">Темы и отображение</string>
     <string name="pref_header_app">Приложения</string>
     <string name="pref_header_general">General</string>
@@ -68,9 +70,10 @@
     <string name="pref_title_sorting">Метод сортировки</string>
     <string-array name="pref_arr_sorting">
         <item>Сортировка по дате установки</item>
-        <item>Сортировка в алфавитном порядке</item>
-        <item>Отсутствие сортировки</item>
+        <item>Сортировка в алфавитном порядке(A-Z)</item>
+        <item>Сортировка в алфавитном порядке(Z-A)</item>
         <item>По количеству запусков</item>
+        <item>Отсутствие сортировки</item>
     </string-array>
 
     <string name="pref_key_favourite">isLastFavourite</string>
@@ -91,22 +94,23 @@
     </string-array>
 
     <string name="pref_title_favorite_size">Количество приложений в избранном</string>
-    <string-array name="pref_arr_favorite_size">
+    <integer-array name="pref_arr_favorite_size">
         <item>1</item>
         <item>5</item>
         <item>10</item>
         <item>15</item>
-    </string-array>
+    </integer-array>
 
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="pref_boolean_list_values">
+    <bool name="pref_true">true</bool>
+    <string-array name="pref_list_values">
         <item>true</item>
         <item>false</item>
+    </string-array>
+
+    <string name="pref_size_layout_def">4</string>
+    <string-array name="pref_size_layout_list_values">
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->
@@ -126,24 +130,31 @@
         <item>6 hours</item>
         <item>Never</item>
     </string-array>
-    <string-array name="list_pref_time_values">
+    <integer-array name="list_pref_time_values">
         <item>1</item>
         <item>6</item>
         <item>24</item>
         <item>168</item>
-    </string-array>
+    </integer-array>
 
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
 
+    <string name="pref_sort_def">0</string>
     <string-array name="list_pref_sort_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
+
+    <string name="shared_preferences">by.md.gornak.homework_preferences</string>
+    <string name="pref_key_show_welcome">isShowWelcomePage</string>
+    <string name="pref_key_layout">isStandardLayout</string>
+    <string name="pref_key_light_theme">isLightTheme</string>
+    <string name="pref_key_sorting">sorting</string>
+    <string name="pref_key_first_start">isFirstStart</string>
+    <string name="attention">Внимание!</string>
+    <string name="exit_warning_text">Вы точно хотите выйти из приложения?</string>
+    <string name="cancel">Отмена</string>
 
 </resources>
