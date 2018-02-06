@@ -30,6 +30,7 @@
         <SwitchPreference
             android:defaultValue="true"
             android:key="@string/pref_key_show_welcome"
+            android:singleLineTitle="false"
             android:title="@string/pref_title_welcome_enable" />
         <!--//сортировка по дате установки/количество запусков/сортировка в алфавитном порядке(сортировать-->
         <!--A-Z или Z-A)/отсутствие сортировки-->

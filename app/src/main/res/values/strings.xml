@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Gornak</string>
-    <string name="account_url">https://github.com/shansilia</string>
     <string name="name">Anastasia Gornak</string>
     <string name="hello">greets you!</string>
     <string name="next">Go to application</string>
@@ -9,16 +8,13 @@
     <string name="dark_theme">Dark theme</string>
     <string name="standard_layout">Standard layout</string>
     <string name="tight_layout">Thick layout</string>
-    <string name="small_layout_value">Portrait: %1$diIcons in a row\nLandscape: %2$d icons in a row</string>
+    <string name="small_layout_value">Portrait: %1$d icons in a row\nLandscape: %2$d icons in a row</string>
     <string name="layout_value">Portrait: %1$d icons in a row\nLandscape: %2$d icons in a row</string>
-    <string name="title_activity_test">TestActivity</string>
     <string name="ok">OK</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_launcher">LauncherActivity</string>
     <string name="navigation_grid">Grid</string>
     <string name="navigation_list">List</string>
     <string name="navigation_settings">Settings</string>
@@ -34,7 +30,6 @@
     <string name="exit_warning_text">Are you sure you want to exit the application? </string>
     <string name="cancel">Cancel</string>
 
-    <string name="pref_title_sync_frequency">Sync frequency</string>
     <string name="phone">+375 29 207 22 04</string>
     <string name="mail">shansiliya@yandex.ru</string>
     <string name="vk">https://vk.com/shansilia</string>
@@ -45,16 +40,10 @@
 
     <string name="pref_header_ui">Themes and display</string>
     <string name="pref_header_app">Applications</string>
-    <string name="pref_header_general">General</string>
 
-
-    <string name="pref_title_favorite_size">Number of applications in favorites</string>
     <string name="pref_title_theme">Theme</string>
     <string name="pref_title_layout">Layout</string>
-    <string name="pref_title_behavior_remove">Removal behavior</string>
     <string name="pref_title_sorting">Sorting method</string>
-    <string name="pref_title_favorite">In favorites</string>
-    <string name="pref_title_favorite_time">Most used for the last</string>
 
     <string-array name="pref_arr_behavior_remove">
         <item>Displacement to a vacant seat</item>
@@ -71,21 +60,6 @@
         <item>No sorting</item>
     </string-array>
 
-    <string name="pref_key_favourite">isLastFavourite</string>
-    <string-array name="pref_arr_favorite">
-        <item>Last running</item>
-        <item>Most used</item>
-    </string-array>
-
-
-    <string name="pref_key_favourite_time">time_interval</string>
-    <string-array name="pref_arr_favorite_time">
-        <item>1 час</item>
-        <item>6 часов</item>
-        <item>сутки</item>
-        <item>неделю</item>
-    </string-array>
-
     <string-array name="pref_arr_theme">
         <item>@string/light_theme</item>
         <item>@string/dark_theme</item>
@@ -95,13 +69,6 @@
         <item>@string/standard_layout</item>
         <item>@string/tight_layout</item>
     </string-array>
-
-    <integer-array name="pref_arr_favorite_size">
-        <item>1</item>
-        <item>5</item>
-        <item>10</item>
-        <item>15</item>
-    </integer-array>
 
     <bool name="pref_true">true</bool>
     <string-array name="pref_list_values">
@@ -114,22 +81,6 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-
-    <integer-array name="list_pref_time_values">
-        <item>1</item>
-        <item>6</item>
-        <item>24</item>
-        <item>168</item>
-    </integer-array>
 
     <string name="pref_sort_def">0</string>
     <string-array name="list_pref_sort_values">

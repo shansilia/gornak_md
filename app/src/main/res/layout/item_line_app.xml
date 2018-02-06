@@ -15,14 +15,17 @@
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/normal_padding"
         android:layout_marginStart="@dimen/normal_padding"
-        android:layout_toEndOf="@id/appImage" />
+        android:layout_toEndOf="@id/appImage"
+        android:layout_toRightOf="@id/appImage" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/appImage"
         android:layout_toEndOf="@id/appImage"
+        android:layout_toRightOf="@id/appImage"
         android:background="@color/colorAccent" />
 
 

@@ -73,6 +73,7 @@ public class DBService {
                         cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)));
                 res.put(app.getAppPackage(), app);
             }
+            cursor.close();
         } catch (SQLiteException e) {
         }
         return res;

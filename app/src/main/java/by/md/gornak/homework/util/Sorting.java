@@ -21,19 +21,17 @@ public class Sorting {
     private static final String START = "3";
     private static final String NONE = "4";
 
-    protected static Context mContext;
 
     public static Comparator getComparable(Context context) {
-        mContext = context;
         String type = Settings.getStringValue(context, R.string.pref_key_sorting);
         if (DATE.equals(type)) {
-            return new DateComparator();
+            return new DateComparator(context);
         } else if (AZ.equals(type)) {
-            return new AComparator(true);
+            return new AComparator(context, true);
         } else if (ZA.equals(type)) {
-            return new AComparator(false);
+            return new AComparator(context, false);
         } else if (START.equals(type)) {
-            DBService dbService = new DBService(mContext);
+            DBService dbService = new DBService(context);
             return new StartComparator(dbService.readAll());
 
         }
@@ -41,6 +39,12 @@ public class Sorting {
     }
 
     static class DateComparator implements Comparator<ResolveInfo> {
+
+        private Context mContext;
+
+        public DateComparator(Context context) {
+            mContext = context;
+        }
 
         @Override
         public int compare(ResolveInfo a, ResolveInfo b) {
@@ -63,9 +67,11 @@ public class Sorting {
 
     static class AComparator implements Comparator<ResolveInfo> {
         boolean isAZ;
+        private Context mContext;
 
-        public AComparator(boolean isAZ) {
+        public AComparator(Context context, boolean isAZ) {
             this.isAZ = isAZ;
+            mContext = context;
         }
 
         @Override

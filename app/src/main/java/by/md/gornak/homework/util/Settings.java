@@ -18,7 +18,7 @@ public class Settings {
     public static void setStringValue(Context context, int idParamName, String newValue) {
         final SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(context.getString(idParamName), newValue);
-        editor.commit();
+        editor.apply();
     }
 
     public static boolean getBooleanValue(Context context, int idParamName, boolean defaultValue) {
@@ -28,6 +28,6 @@ public class Settings {
     public static void setBooleanValue(Context context, int idParamName, boolean newValue) {
         final SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putBoolean(context.getString(idParamName), newValue);
-        editor.commit();
+        editor.apply();
     }
 }
