@@ -57,7 +57,7 @@ public class LauncherActivity extends AppCompatActivity
 
         if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
             openSettings();
-        } else if(getSupportFragmentManager().getFragments().isEmpty()){
+        } else if (getSupportFragmentManager().getFragments().isEmpty()) {
             openGrid();
         }
 
@@ -132,6 +132,7 @@ public class LauncherActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        super.onBackPressed();
         int id = item.getItemId();
 
         if (id == R.id.nav_list) {
