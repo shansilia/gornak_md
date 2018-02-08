@@ -61,6 +61,7 @@ public class LayoutFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Settings.setBooleanValue(getContext(), R.string.pref_key_show_welcome, false);
                 Intent intent = new Intent(getActivity(), LauncherActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -81,7 +82,6 @@ public class LayoutFragment extends Fragment {
             rbStandard.setChecked(size == STANDARD);
             rbTight.setChecked(size != STANDARD);
             Settings.setStringValue(getContext(), R.string.pref_key_layout, String.valueOf(size));
-            Settings.setBooleanValue(getContext(), R.string.pref_key_show_welcome, false);
         }
     }
 }
