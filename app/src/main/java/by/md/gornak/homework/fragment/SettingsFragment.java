@@ -13,6 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yandex.metrica.YandexMetrica;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.activity.LauncherActivity;
 
@@ -54,7 +59,9 @@ public class SettingsFragment extends PreferenceFragment {
                                 && !key.equals(getString(R.string.pref_key_sorting))) {
                             return;
                         }
-
+                        Map<String, Object> eventAttributes = new HashMap<String, Object>();
+                        eventAttributes.put(getString(R.string.yandex_settings), key);
+                        YandexMetrica.reportEvent(getString(R.string.yandex_change_settings));
                         getActivity().finish();
                         final Intent intent = getActivity().getIntent();
                         intent.putExtra(LauncherActivity.OPEN_SETTINGS, true);

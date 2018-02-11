@@ -2,7 +2,7 @@
     <string name="app_name">Gornak</string>
     <string name="name">Anastasia Gornak</string>
     <string name="hello">greets you!</string>
-    <string name="next">Go to application</string>
+    <string name="next">Go to application</string>   
 
     <string name="light_theme">Light theme</string>
     <string name="dark_theme">Dark theme</string>
@@ -97,5 +97,13 @@
     <string name="pref_key_light_theme">isLightTheme</string>
     <string name="pref_key_sorting">sorting</string>
     <string name="pref_key_first_start">isFirstStart</string>
+
+    <string name="yandex_api_key">167e67b1-0b42-4a65-8e79-b55e94bb50dd</string>
+    <string name="yandex_settings">settings</string>
+    <string name="yandex_start_app">start app</string>
+    <string name="yandex_change_settings">change settings</string>
+    <string name="yandex_open_profile">open profile</string>
+    <string name="yandex_open_app">open app</string>
+    <string name="yandex_delete_app">delete app</string>
 
 </resources>

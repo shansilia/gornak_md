@@ -20,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yandex.metrica.YandexMetrica;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +56,7 @@ public abstract class AppFragment extends Fragment {
 
             startActivity(i);
 
+            YandexMetrica.reportEvent(getString(R.string.yandex_open_app));
             incFrequency(activity.applicationInfo.packageName);
         }
 
@@ -136,6 +139,8 @@ public abstract class AppFragment extends Fragment {
                         Intent intent = new Intent(Intent.ACTION_DELETE, Uri.fromParts("package",
                                 packageName, null));
                         startActivity(intent);
+
+                        YandexMetrica.reportEvent(getString(R.string.yandex_delete_app));
                         break;
                     case 2:
                         openInfoApp(packageName);

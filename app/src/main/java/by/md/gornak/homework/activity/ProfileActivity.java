@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.yandex.metrica.YandexMetrica;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.util.Settings;
 
@@ -26,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         setAvatar();
         setupToolbar();
+
+        YandexMetrica.reportEvent(getString(R.string.yandex_open_profile));
     }
 
     private void setupToolbar() {

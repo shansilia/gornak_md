@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.crashlytics.android.Crashlytics;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Fabric.with(this, new Crashlytics());
+        YandexMetrica.reportEvent(getString(R.string.yandex_start_app));
         if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
             super.onCreate(savedInstanceState);
             final Intent intent = new Intent(this, LauncherActivity.class);
