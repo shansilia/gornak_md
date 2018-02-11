@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.adapter.DesktopPageAdapter;
 import by.md.gornak.homework.fragment.AppGridFragment;
 import by.md.gornak.homework.fragment.AppListFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
@@ -32,12 +34,28 @@ public class LauncherActivity extends AppCompatActivity
 
     public static final String OPEN_SETTINGS = "openSettings";
 
+
+    private ViewPager vpDesktop;
+    private DesktopPageAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
                 R.style.AppTheme : R.style.DarkAppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+
+        initView();
+
+        if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
+            openSettings();
+        } else if (getSupportFragmentManager().getFragments().isEmpty()) {
+            vpDesktop.setCurrentItem(1);
+        }
+
+    }
+
+    private void initView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,12 +73,13 @@ public class LauncherActivity extends AppCompatActivity
         setAvatar(avatar);
         setAvatarAction(avatar);
 
-        if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
-            openSettings();
-        } else if (getSupportFragmentManager().getFragments().isEmpty()) {
-            openGrid();
-        }
+        applyPager();
+    }
 
+    private void applyPager() {
+        vpDesktop = findViewById(R.id.vpDesktop);
+        mAdapter = new DesktopPageAdapter(getSupportFragmentManager());
+        vpDesktop.setAdapter(mAdapter);
     }
 
     @Override
