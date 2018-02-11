@@ -10,15 +10,21 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.yandex.metrica.YandexMetrica;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
+import by.md.gornak.homework.util.Sorting;
 
 
 public abstract class AppFragment extends Fragment {
@@ -85,7 +91,15 @@ public abstract class AppFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
+        getActivity().unregisterReceiver(mMonitor);
         dbService.saveAll(apps.values());
+    }
+
+    protected List<ResolveInfo> getAppList() {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        return getContext().getPackageManager().queryIntentActivities(mainIntent, 0);
     }
 
     protected void incFrequency(String packageName) {

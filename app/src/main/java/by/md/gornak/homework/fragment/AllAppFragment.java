@@ -59,12 +59,6 @@ public abstract class AllAppFragment extends AppFragment {
         return rootView;
     }
 
-    protected List<ResolveInfo> getAppList() {
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        return getContext().getPackageManager().queryIntentActivities(mainIntent, 0);
-    }
-
     @Override
     protected void showDialog(final String packageName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

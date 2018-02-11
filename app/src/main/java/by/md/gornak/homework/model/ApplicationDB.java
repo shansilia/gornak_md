@@ -1,12 +1,25 @@
 package by.md.gornak.homework.model;
 
 
+import android.content.pm.ResolveInfo;
+
 public class ApplicationDB {
+
+    private ResolveInfo info;
     private String appPackage;
     private boolean isFavourite;
     private int frequency;
     private boolean isDesktop;
     private int position;
+
+    public ApplicationDB(ResolveInfo info) {
+        this.info = info;
+        this.appPackage = info.activityInfo.applicationInfo.packageName;
+        this.isFavourite = false;
+        this.frequency = 0;
+        this.isDesktop = false;
+        this.position = 0;
+    }
 
     public ApplicationDB(String appPackage, boolean isFavourite, int frequency,
                          boolean isDesktop, int position) {
@@ -70,5 +83,13 @@ public class ApplicationDB {
 
     public void setPosition(int pos) {
         this.position = pos;
+    }
+
+    public ResolveInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(ResolveInfo info) {
+        this.info = info;
     }
 }
