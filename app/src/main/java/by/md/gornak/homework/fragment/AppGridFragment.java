@@ -12,7 +12,7 @@ import by.md.gornak.homework.util.Settings;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
-public class AppGridFragment extends AppFragment {
+public class AppGridFragment extends AllAppFragment {
 
     private static final int LAND = 2;
 

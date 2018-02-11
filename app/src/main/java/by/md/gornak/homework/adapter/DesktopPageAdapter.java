@@ -10,7 +10,7 @@ import java.util.List;
 
 import by.md.gornak.homework.fragment.AppGridFragment;
 import by.md.gornak.homework.fragment.AppListFragment;
-import by.md.gornak.homework.fragment.ThemeFragment;
+import by.md.gornak.homework.fragment.DesktopFragment;
 
 public class DesktopPageAdapter extends FragmentPagerAdapter {
 
@@ -25,7 +25,7 @@ public class DesktopPageAdapter extends FragmentPagerAdapter {
     private void createPage(){
         pages = new ArrayList<>();
         pages.add(new AppListFragment());
-        pages.add(new ThemeFragment());
+        pages.add(new DesktopFragment());
         pages.add(new AppGridFragment());
     }
 

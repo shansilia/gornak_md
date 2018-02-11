@@ -5,11 +5,16 @@ public class ApplicationDB {
     private String appPackage;
     private boolean isFavourite;
     private int frequency;
+    private boolean isDesktop;
+    private int position;
 
-    public ApplicationDB(String appPackage, boolean isFavourite, int frequency) {
+    public ApplicationDB(String appPackage, boolean isFavourite, int frequency,
+                         boolean isDesktop, int position) {
         this.appPackage = appPackage;
         this.isFavourite = isFavourite;
         this.frequency = frequency;
+        this.isDesktop = isDesktop;
+        this.position = position;
     }
 
     @Override
@@ -49,5 +54,21 @@ public class ApplicationDB {
 
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+
+    public boolean isDesktop() {
+        return isDesktop;
+    }
+
+    public void setDesktop(boolean desktop) {
+        isDesktop = desktop;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int pos) {
+        this.position = pos;
     }
 }

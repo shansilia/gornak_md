@@ -8,7 +8,7 @@ import java.util.List;
 
 import by.md.gornak.homework.adapter.AppAdapter;
 
-public class AppListFragment extends AppFragment {
+public class AppListFragment extends AllAppFragment {
 
     @Override
     protected void setupRecyclerView(List<ResolveInfo> pkgAppsList) {

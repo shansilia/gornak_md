@@ -26,6 +26,7 @@ import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.DesktopPageAdapter;
 import by.md.gornak.homework.fragment.AppGridFragment;
 import by.md.gornak.homework.fragment.AppListFragment;
+import by.md.gornak.homework.fragment.DesktopFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 import by.md.gornak.homework.util.Settings;
 
@@ -154,16 +155,27 @@ public class LauncherActivity extends AppCompatActivity
         super.onBackPressed();
         int id = item.getItemId();
 
-        if (id == R.id.nav_list) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            AppListFragment fragment = new AppListFragment();
-            transaction.replace(R.id.container, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        } else if (id == R.id.nav_grid) {
-            openGrid();
-        } else if (id == R.id.nav_manage) {
-            openSettings();
+        switch (id) {
+            case R.id.nav_list:
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                AppListFragment fragment = new AppListFragment();
+                transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+            case R.id.nav_grid:
+                openGrid();
+                break;
+            case R.id.nav_manage:
+                openSettings();
+                break;
+            case R.id.nav_main:
+                FragmentTransaction transactionMain = getSupportFragmentManager().beginTransaction();
+                DesktopFragment fragmentMain = new DesktopFragment();
+                transactionMain.replace(R.id.container, fragmentMain);
+                transactionMain.addToBackStack(null);
+                transactionMain.commit();
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

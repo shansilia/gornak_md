@@ -70,7 +70,42 @@ public class DBService {
                 ApplicationDB app = new ApplicationDB(
                         cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
                         cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)));
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
+                res.put(app.getAppPackage(), app);
+            }
+            cursor.close();
+        } catch (SQLiteException e) {
+        }
+        return res;
+    }
+
+    public Map<String, ApplicationDB> readDesktop() {
+        Map<String, ApplicationDB> res = new HashMap<>();
+        try {
+            SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+            String whereClause = Tables.Columns.DESKTOP + "=?";
+            String[] whereArgs = new String[]{"true"};
+
+            Cursor cursor = db.query(
+                    Tables.TABLE_NAME,
+                    null,
+                    whereClause,
+                    whereArgs,
+                    null,
+                    null,
+                    null
+            );
+
+            while (cursor.moveToNext()) {
+                ApplicationDB app = new ApplicationDB(
+                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
+                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
                 res.put(app.getAppPackage(), app);
             }
             cursor.close();

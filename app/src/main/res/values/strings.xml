@@ -15,6 +15,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="navigation_desktop">Desktop</string>
     <string name="navigation_grid">Grid</string>
     <string name="navigation_list">List</string>
     <string name="navigation_settings">Settings</string>
