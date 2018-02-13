@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.crashlytics.android.Crashlytics;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import java.util.List;
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.HelloPageAdapter;
 import by.md.gornak.homework.util.Settings;
-import io.fabric.sdk.android.Fabric;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -30,7 +29,8 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Fabric.with(this, new Crashlytics());
+        //Fabric.with(this, new Crashlytics());
+        YandexMetrica.reportEvent(getString(R.string.yandex_start_app));
         if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
             super.onCreate(savedInstanceState);
             final Intent intent = new Intent(this, LauncherActivity.class);
@@ -39,6 +39,7 @@ public class StartActivity extends AppCompatActivity {
             return;
         }
 
+        YandexMetrica.reportEvent(getString(R.string.yandex_add_desktop));
         if (Settings.getBooleanValue(this, R.string.pref_key_first_start, true)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref, false);
             Settings.setBooleanValue(this, R.string.pref_key_first_start, false);
@@ -50,9 +51,9 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         applyPager();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             vpHello.setCurrentItem(savedInstanceState.getInt(START_ITEM, 0));
-        }else {
+        } else {
             vpHello.setCurrentItem(getIntent().getIntExtra(START_ITEM, 0));
         }
     }

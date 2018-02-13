@@ -3,14 +3,10 @@ package by.md.gornak.homework.util;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 
 import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
 
 public class Sorting {
@@ -31,14 +27,12 @@ public class Sorting {
         } else if (ZA.equals(type)) {
             return new AComparator(context, false);
         } else if (START.equals(type)) {
-            DBService dbService = new DBService(context);
-            return new StartComparator(dbService.readAll());
-
+            return new StartComparator();
         }
         return new NoneComparator();
     }
 
-    static class DateComparator implements Comparator<ResolveInfo> {
+    static class DateComparator implements Comparator<ApplicationDB> {
 
         private Context mContext;
 
@@ -47,15 +41,15 @@ public class Sorting {
         }
 
         @Override
-        public int compare(ResolveInfo a, ResolveInfo b) {
+        public int compare(ApplicationDB a, ApplicationDB b) {
             try {
                 long first = mContext
                         .getPackageManager()
-                        .getPackageInfo(a.activityInfo.applicationInfo.packageName, 0)
+                        .getPackageInfo(a.getAppPackage(), 0)
                         .firstInstallTime;
                 long second = mContext
                         .getPackageManager()
-                        .getPackageInfo(b.activityInfo.applicationInfo.packageName, 0)
+                        .getPackageInfo(b.getAppPackage(), 0)
                         .firstInstallTime;
 
                 return (int) (second - first);
@@ -65,7 +59,7 @@ public class Sorting {
         }
     }
 
-    static class AComparator implements Comparator<ResolveInfo> {
+    static class AComparator implements Comparator<ApplicationDB> {
         boolean isAZ;
         private Context mContext;
 
@@ -75,36 +69,26 @@ public class Sorting {
         }
 
         @Override
-        public int compare(ResolveInfo a, ResolveInfo b) {
+        public int compare(ApplicationDB a, ApplicationDB b) {
             int revert = (isAZ ? 1 : -1);
-            return a.loadLabel(mContext.getPackageManager()).toString()
-                    .compareTo(b.loadLabel(mContext.getPackageManager()).toString()) * revert;
+            return a.getInfo().loadLabel(mContext.getPackageManager()).toString()
+                    .compareTo(b.getInfo().loadLabel(mContext.getPackageManager()).toString()) * revert;
         }
     }
 
-    static class NoneComparator implements Comparator<ResolveInfo> {
+    static class NoneComparator implements Comparator<ApplicationDB> {
 
         @Override
-        public int compare(ResolveInfo a, ResolveInfo b) {
+        public int compare(ApplicationDB a, ApplicationDB b) {
             return 1;
         }
     }
 
-    static class StartComparator implements Comparator<ResolveInfo> {
-
-        Map<String, ApplicationDB> mData;
-
-        StartComparator(Map<String, ApplicationDB> data) {
-            mData = data;
-        }
+    static class StartComparator implements Comparator<ApplicationDB> {
 
         @Override
-        public int compare(ResolveInfo a, ResolveInfo b) {
-            ApplicationDB first = mData.get(a.activityInfo.applicationInfo.packageName);
-            ApplicationDB second = mData.get(b.activityInfo.applicationInfo.packageName);
-            int firstCount = first == null ? 0 : first.getFrequency();
-            int secondCount = second == null ? 0 : second.getFrequency();
-            return secondCount - firstCount;
+        public int compare(ApplicationDB a, ApplicationDB b) {
+            return b.getFrequency() - a.getFrequency();
         }
     }
 }

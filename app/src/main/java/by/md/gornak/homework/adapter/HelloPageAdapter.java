@@ -22,7 +22,7 @@ public class HelloPageAdapter extends FragmentPagerAdapter {
     }
 
 
-    private void createPage(){
+    private void createPage() {
         pages = new ArrayList<>();
         pages.add(new HelloFragment());
         pages.add(new ThemeFragment());

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -21,9 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.yandex.metrica.YandexMetrica;
+
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.fragment.AppGridFragment;
-import by.md.gornak.homework.fragment.AppListFragment;
+import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 import by.md.gornak.homework.util.Settings;
 
@@ -32,13 +34,27 @@ public class LauncherActivity extends AppCompatActivity
 
     public static final String OPEN_SETTINGS = "openSettings";
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
                 R.style.AppTheme : R.style.DarkAppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        initView();
+
+        if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
+            openSettings();
+        } else if (getSupportFragmentManager().getFragments().isEmpty()) {
+            openDesktop();
+        }
+
+    }
+
+    private void initView() {
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -54,13 +70,6 @@ public class LauncherActivity extends AppCompatActivity
 
         setAvatar(avatar);
         setAvatarAction(avatar);
-
-        if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
-            openSettings();
-        } else if (getSupportFragmentManager().getFragments().isEmpty()) {
-            openGrid();
-        }
-
     }
 
     @Override
@@ -135,34 +144,48 @@ public class LauncherActivity extends AppCompatActivity
         super.onBackPressed();
         int id = item.getItemId();
 
-        if (id == R.id.nav_list) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            AppListFragment fragment = new AppListFragment();
-            transaction.replace(R.id.container, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        } else if (id == R.id.nav_grid) {
-            openGrid();
-        } else if (id == R.id.nav_manage) {
-            openSettings();
+        switch (id) {
+            case R.id.nav_list:
+                MainFragment list = new MainFragment();
+                list.openListFragment();
+                openFragment(list);
+                break;
+            case R.id.nav_grid:
+                MainFragment fragment = new MainFragment();
+                fragment.openGridFragment();
+                openFragment(fragment);
+                break;
+            case R.id.nav_manage:
+                openSettings();
+                break;
+            case R.id.nav_main:
+                Intent intent = new Intent(this, LauncherActivity.class);
+                startActivity(intent);
+                break;
         }
 
+        YandexMetrica.reportEvent(getString(R.string.yandex_navigation));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void openGrid() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        AppGridFragment fragment = new AppGridFragment();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void openDesktop() {
+        MainFragment fragment = new MainFragment();
+        fragment.openDesktopFragment();
+        openFragment(fragment);
     }
 
     private void openSettings() {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         SettingsFragment fragment = new SettingsFragment();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
