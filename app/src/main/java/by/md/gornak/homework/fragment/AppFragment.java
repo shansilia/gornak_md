@@ -27,9 +27,12 @@ import by.md.gornak.homework.model.ApplicationDB;
 
 public abstract class AppFragment extends Fragment {
 
+    private static final int DESKTOP_SIZE = 28;
+
     protected static DBService dbService;
     public static Map<String, ApplicationDB> apps;
     protected static List<ApplicationDB> appsDesktop;
+
 
     protected AppViewHolder.OnAppClickListener appListener = new AppViewHolder.OnAppClickListener() {
         @Override
@@ -62,8 +65,8 @@ public abstract class AppFragment extends Fragment {
         dbService = new DBService(getContext());
         if (apps == null) {
             apps = dbService.readAll();
-            appsDesktop = new ArrayList<>(16);
-            for (int i = 0; i < 16; i++) {
+            appsDesktop = new ArrayList<>(DESKTOP_SIZE);
+            for (int i = 0; i < DESKTOP_SIZE; i++) {
                 appsDesktop.add(null);
             }
             fillAppInfo();

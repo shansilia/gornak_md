@@ -51,8 +51,6 @@ public class AppAdapter extends RecyclerView.Adapter<AppViewHolder> {
     }
 
     public void update(List<ApplicationDB> info) {
-//        List<ApplicationDB> buf = new ArrayList<>();
-//        buf.addAll(info);
         infoList.clear();
         infoList.addAll(info);
         notifyDataSetChanged();

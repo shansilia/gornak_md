@@ -21,7 +21,8 @@ public class MainFragment extends Fragment {
 
     private ViewPager vpDesktop;
     private DesktopPageAdapter mAdapter;
-    int curPage = 1;
+    private int curPage = 1;
+
 
     protected BroadcastReceiver mMonitor = new BroadcastReceiver() {
         @Override

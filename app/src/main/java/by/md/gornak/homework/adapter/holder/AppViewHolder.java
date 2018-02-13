@@ -48,6 +48,10 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         name.setText(info.loadLabel(packageManager));
     }
 
+    public void setTouchListener(View.OnTouchListener touchListener) {
+        itemView.setOnTouchListener(touchListener);
+    }
+
     public interface OnAppClickListener {
         void onClick(ResolveInfo info);
 

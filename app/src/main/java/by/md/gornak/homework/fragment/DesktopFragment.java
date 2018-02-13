@@ -8,19 +8,24 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.List;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.DesktopAppAdapter;
+import by.md.gornak.homework.adapter.TouchHelper;
 import by.md.gornak.homework.model.ApplicationDB;
 
-public class DesktopFragment extends AppFragment {
+public class DesktopFragment extends AppFragment implements DesktopAppAdapter.OnDragListener {
 
     protected DesktopAppAdapter mAdapter;
     protected RecyclerView mRecyclerView;
+    protected ItemTouchHelper mItemTouchHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,7 +93,13 @@ public class DesktopFragment extends AppFragment {
 
     protected void setupRecyclerView() {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        mAdapter = new DesktopAppAdapter(getContext(), appsDesktop, appListener);
+        mAdapter = new DesktopAppAdapter(getContext(), appsDesktop, appListener, this);
+
+        ItemTouchHelper.Callback callback =
+                new TouchHelper(mAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -96,5 +107,17 @@ public class DesktopFragment extends AppFragment {
     protected void removeFromDesktop(String packageName) {
         super.removeFromDesktop(packageName);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void changePosition(List<ApplicationDB> changes) {
+        for(ApplicationDB app : changes) {
+            apps.put(app.getAppPackage(), app);
+        }
     }
 }
