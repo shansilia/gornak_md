@@ -49,7 +49,7 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
         if (infoList.get(position) == null) {
             return;
         }
-        ResolveInfo info = infoList.get(position).getInfo();
+        ApplicationDB info = infoList.get(position);
         holder.setData(info, packageManager);
         holder.setTouchListener(new View.OnTouchListener() {
             @Override

@@ -26,4 +26,9 @@ public class AppGridFragment extends AllAppFragment {
         mAdapter = new AppAdapter(getContext(), pkgAppsList, true, appListener);
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    @Override
+    protected void appClick(ApplicationDB info) {
+        super.appClick(info);
+    }
 }

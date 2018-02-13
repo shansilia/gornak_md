@@ -24,6 +24,8 @@ import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
 
+import static by.md.gornak.homework.model.ApplicationDB.TYPE.PHONE;
+
 
 public abstract class AppFragment extends Fragment {
 
@@ -36,26 +38,13 @@ public abstract class AppFragment extends Fragment {
 
     protected AppViewHolder.OnAppClickListener appListener = new AppViewHolder.OnAppClickListener() {
         @Override
-        public void onClick(ResolveInfo info) {
-            ActivityInfo activity = info.activityInfo;
-            ComponentName name = new ComponentName(activity.applicationInfo.packageName,
-                    activity.name);
-            Intent i = new Intent(Intent.ACTION_MAIN);
-
-            i.addCategory(Intent.CATEGORY_LAUNCHER);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            i.setComponent(name);
-
-            startActivity(i);
-
-            YandexMetrica.reportEvent(getString(R.string.yandex_open_app));
-            incFrequency(activity.applicationInfo.packageName);
+        public void onClick(ApplicationDB info) {
+            appClick(info);
         }
 
         @Override
-        public void onLongClick(String packageName) {
-            showDialog(packageName);
+        public void onLongClick(String packageName, int position) {
+            showDialog(packageName, position);
         }
     };
 
@@ -100,16 +89,13 @@ public abstract class AppFragment extends Fragment {
     }
 
     protected void incFrequency(String packageName) {
-        if (apps.containsKey(packageName)) {
-            ApplicationDB app = apps.get(packageName);
-            app.setFrequency(app.getFrequency() + 1);
-        } else {
-            apps.put(packageName, new ApplicationDB(packageName, false, 1, false, 0));
-        }
+        ApplicationDB app = apps.get(packageName);
+        app.setFrequency(app.getFrequency() + 1);
+
         update();
     }
 
-    protected void showDialog(final String packageName) {
+    protected void showDialog(final String packageName, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder.setTitle(R.string.app_dialog_title);
@@ -193,6 +179,28 @@ public abstract class AppFragment extends Fragment {
                 return;
             }
         }
+    }
+
+    protected void appClick(ApplicationDB info) {
+        if(info.getType().equals(PHONE.toString())) {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
+            startActivity(intent);
+            return;
+        }
+        ActivityInfo activity = info.getInfo().activityInfo;
+        ComponentName name = new ComponentName(activity.applicationInfo.packageName,
+                activity.name);
+        Intent i = new Intent(Intent.ACTION_MAIN);
+
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        i.setComponent(name);
+
+        startActivity(i);
+
+        YandexMetrica.reportEvent(getString(R.string.yandex_open_app));
+        incFrequency(activity.applicationInfo.packageName);
     }
 
     public abstract void addApp(String packageName);

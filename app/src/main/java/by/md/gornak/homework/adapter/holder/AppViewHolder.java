@@ -3,18 +3,23 @@ package by.md.gornak.homework.adapter.holder;
 
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
+
 import by.md.gornak.homework.R;
+import by.md.gornak.homework.model.ApplicationDB;
 
 public class AppViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView icon;
     private TextView name;
-    private ResolveInfo info;
+    private ApplicationDB info;
     private OnAppClickListener mListener;
 
     public AppViewHolder(View itemView, OnAppClickListener listener) {
@@ -35,17 +40,25 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                mListener.onLongClick(info.activityInfo.applicationInfo.packageName);
+                mListener.onLongClick(info == null ? null : info.getInfo().activityInfo.applicationInfo.packageName, getAdapterPosition());
                 return true;
             }
         });
     }
 
-    public void setData(ResolveInfo info, PackageManager packageManager) {
+    public void setData(ApplicationDB info, PackageManager packageManager) {
         this.info = info;
+        if(info.getType().equals(ApplicationDB.TYPE.APP.toString())) {
+            icon.setImageDrawable(info.getInfo().loadIcon(packageManager));
+            name.setText(info.getInfo().loadLabel(packageManager));
+        } else {
+            byte[] outImage=info.getImage();
+            ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
+            Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+            icon.setImageBitmap(theImage);
 
-        icon.setImageDrawable(info.loadIcon(packageManager));
-        name.setText(info.loadLabel(packageManager));
+            name.setText(info.getAppPackage());
+        }
     }
 
     public void setTouchListener(View.OnTouchListener touchListener) {
@@ -53,8 +66,8 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
     }
 
     public interface OnAppClickListener {
-        void onClick(ResolveInfo info);
+        void onClick(ApplicationDB info);
 
-        void onLongClick(String packageName);
+        void onLongClick(String packageName, int position);
     }
 }

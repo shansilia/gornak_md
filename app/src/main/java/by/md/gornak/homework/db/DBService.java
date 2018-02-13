@@ -67,15 +67,15 @@ public class DBService {
                     null
             );
 
-            while (cursor.moveToNext()) {
-                ApplicationDB app = new ApplicationDB(
-                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
-                res.put(app.getAppPackage(), app);
-            }
+//            while (cursor.moveToNext()) {
+//                ApplicationDB app = new ApplicationDB(
+//                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
+//                res.put(app.getAppPackage(), app);
+//            }
             cursor.close();
         } catch (SQLiteException e) {
         }
@@ -100,15 +100,15 @@ public class DBService {
                     null
             );
 
-            while (cursor.moveToNext()) {
-                ApplicationDB app = new ApplicationDB(
-                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
-                res.put(app.getAppPackage(), app);
-            }
+//            while (cursor.moveToNext()) {
+//                ApplicationDB app = new ApplicationDB(
+//                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
+//                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)));
+//                res.put(app.getAppPackage(), app);
+//            }
             cursor.close();
         } catch (SQLiteException e) {
         }

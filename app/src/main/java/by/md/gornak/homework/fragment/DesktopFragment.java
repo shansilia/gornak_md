@@ -1,31 +1,53 @@
 package by.md.gornak.homework.fragment;
 
 
+import android.content.ContentUris;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.yandex.metrica.YandexMetrica;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.DesktopAppAdapter;
 import by.md.gornak.homework.adapter.TouchHelper;
 import by.md.gornak.homework.model.ApplicationDB;
+import by.md.gornak.homework.util.ContactGenerator;
+
+import static android.app.Activity.RESULT_OK;
 
 public class DesktopFragment extends AppFragment implements DesktopAppAdapter.OnDragListener {
+
+    protected static final int CONTACT_PICKER_RESULT = 1;
 
     protected DesktopAppAdapter mAdapter;
     protected RecyclerView mRecyclerView;
     protected ItemTouchHelper mItemTouchHelper;
+    protected int currentPosition = -1;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +62,25 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
         mRecyclerView = rootView.findViewById(R.id.appList);
         setupRecyclerView();
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CONTACT_PICKER_RESULT:
+                    Bundle extras = data.getExtras();
+                    Uri uriContact = data.getData();
+                    ApplicationDB newContact = ContactGenerator.createContact(getActivity(), uriContact);
+                    newContact.setPosition(currentPosition);
+                    appsDesktop.add(newContact);
+                    apps.put(newContact.getAppPackage(), newContact);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+            }
+
+        }
     }
 
     public void update() {
@@ -73,6 +114,42 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
             }
         }
         return pos;
+    }
+
+    @Override
+    protected void showDialog(final String packageName, final int position) {
+        if(packageName != null) {
+            super.showDialog(packageName, position);
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle(R.string.app_dialog_title);
+
+        String[] actions = getResources().getStringArray(R.array.empty_desktop_dialog_action);
+
+        builder.setItems(actions, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        currentPosition = position;
+                        Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
+                                ContactsContract.Contacts.CONTENT_URI);
+                        startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
+
+        builder.create().show();
     }
 
     protected void openInfoApp(String packageName) {
@@ -120,4 +197,6 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
             apps.put(app.getAppPackage(), app);
         }
     }
+
+
 }

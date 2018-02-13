@@ -42,7 +42,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppViewHolder> {
     @Override
     public void onBindViewHolder(AppViewHolder holder, int position) {
         ApplicationDB info = infoList.get(position);
-        holder.setData(info.getInfo(), packageManager);
+        holder.setData(info, packageManager);
     }
 
     @Override

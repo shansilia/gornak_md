@@ -7,27 +7,46 @@ public class ApplicationDB {
 
     private ResolveInfo info;
     private String appPackage;
-    private boolean isFavourite;
+    private boolean isFavourite = false;
     private int frequency;
     private boolean isDesktop;
     private int position;
+    private String type;
+    private String additionaly;
+    private byte[] image;
+
+    public enum TYPE {APP, PHONE}
 
     public ApplicationDB(ResolveInfo info) {
         this.info = info;
         this.appPackage = info.activityInfo.applicationInfo.packageName;
-        this.isFavourite = false;
         this.frequency = 0;
         this.isDesktop = false;
         this.position = -1;
+        type = TYPE.APP.toString();
     }
 
-    public ApplicationDB(String appPackage, boolean isFavourite, int frequency,
-                         boolean isDesktop, int position) {
+    public ApplicationDB(ResolveInfo info, String appPackage, int frequency,
+                         boolean isDesktop, int position, String type) {
+        this.info = info;
         this.appPackage = appPackage;
-        this.isFavourite = isFavourite;
         this.frequency = frequency;
         this.isDesktop = isDesktop;
         this.position = position;
+        this.type = type;
+        this.additionaly = null;
+        this.image = new byte[]{};
+    }
+
+    public ApplicationDB(String type, String appPackage, int position, String additionaly, byte[] image) {
+        this.info = null;
+        this.appPackage = appPackage;
+        this.frequency = 0;
+        this.isDesktop = true;
+        this.position = position;
+        this.type = type;
+        this.additionaly = additionaly;
+        this.image = image;
     }
 
     @Override
@@ -91,5 +110,29 @@ public class ApplicationDB {
 
     public void setInfo(ResolveInfo info) {
         this.info = info;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAdditionaly() {
+        return additionaly;
+    }
+
+    public void setAdditionaly(String additionaly) {
+        this.additionaly = additionaly;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
