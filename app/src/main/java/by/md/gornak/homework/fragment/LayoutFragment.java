@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.yandex.metrica.YandexMetrica;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.activity.LauncherActivity;
 import by.md.gornak.homework.util.Settings;
@@ -82,6 +87,11 @@ public class LayoutFragment extends Fragment {
             rbStandard.setChecked(size == STANDARD);
             rbTight.setChecked(size != STANDARD);
             Settings.setStringValue(getContext(), R.string.pref_key_layout, String.valueOf(size));
+
+
+            Map<String, Object> eventAttributes = new HashMap<>();
+            eventAttributes.put(getString(R.string.pref_key_layout), size == STANDARD);
+            YandexMetrica.reportEvent(getString(R.string.yandex_change_main_page));
         }
     }
 }

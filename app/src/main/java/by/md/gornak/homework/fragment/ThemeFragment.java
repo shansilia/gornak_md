@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
+import com.yandex.metrica.YandexMetrica;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.activity.LauncherActivity;
 import by.md.gornak.homework.activity.StartActivity;
 import by.md.gornak.homework.util.Settings;
 
@@ -59,6 +63,11 @@ public class ThemeFragment extends Fragment {
             rbDark.setChecked(!isLight);
             Settings.setStringValue(getContext(), R.string.pref_key_light_theme, String.valueOf(isLight));
             getActivity().finish();
+
+            Map<String, Object> eventAttributes = new HashMap<>();
+            eventAttributes.put(getString(R.string.pref_key_light_theme), isLight);
+            YandexMetrica.reportEvent(getString(R.string.yandex_change_main_page));
+
             final Intent intent = getActivity().getIntent();
             intent.putExtra(StartActivity.START_ITEM, 1);
             getActivity().startActivity(intent);

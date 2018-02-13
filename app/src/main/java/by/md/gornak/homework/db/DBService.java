@@ -29,6 +29,11 @@ public class DBService {
             contentValues.put(Tables.Columns.PACKAGE, app.getAppPackage());
             contentValues.put(Tables.Columns.FAVOURITE, app.isFavourite());
             contentValues.put(Tables.Columns.FREQUENCY, app.getFrequency());
+            contentValues.put(Tables.Columns.DESKTOP, app.isDesktop());
+            contentValues.put(Tables.Columns.POSITION, app.getPosition());
+            contentValues.put(Tables.Columns.TYPE, app.getType());
+            contentValues.put(Tables.Columns.ADD, app.getAdditionaly());
+            contentValues.put(Tables.Columns.IMAGE, app.getImage());
             try {
                 int id = (int) db.insertWithOnConflict(Tables.TABLE_NAME, null,
                         contentValues, SQLiteDatabase.CONFLICT_IGNORE);
@@ -38,7 +43,6 @@ public class DBService {
                             Tables.Columns.PACKAGE + " = ?",
                             new String[]{app.getAppPackage()});
                 }
-                // db.insert(Tables.TABLE_NAME, null, contentValues);
             } catch (SQLiteException e) {
 
             }
@@ -67,15 +71,24 @@ public class DBService {
             );
 
             while (cursor.moveToNext()) {
-                ApplicationDB app = new ApplicationDB(
-                        cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
-                        cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)));
+                ApplicationDB app = getApp(cursor);
                 res.put(app.getAppPackage(), app);
             }
             cursor.close();
         } catch (SQLiteException e) {
         }
         return res;
+    }
+
+    private ApplicationDB getApp(Cursor cursor) {
+        return new ApplicationDB(
+                cursor.getString(cursor.getColumnIndex(Tables.Columns.PACKAGE)),
+                cursor.getInt(cursor.getColumnIndex(Tables.Columns.FAVOURITE)) > 0,
+                cursor.getInt(cursor.getColumnIndex(Tables.Columns.FREQUENCY)),
+                cursor.getInt(cursor.getColumnIndex(Tables.Columns.DESKTOP)) > 0,
+                cursor.getInt(cursor.getColumnIndex(Tables.Columns.POSITION)),
+                cursor.getString(cursor.getColumnIndex(Tables.Columns.TYPE)),
+                cursor.getString(cursor.getColumnIndex(Tables.Columns.ADD)),
+                cursor.getBlob(cursor.getColumnIndex(Tables.Columns.IMAGE)));
     }
 }
