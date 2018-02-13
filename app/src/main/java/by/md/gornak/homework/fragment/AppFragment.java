@@ -34,7 +34,7 @@ import static by.md.gornak.homework.model.ApplicationDB.TYPE.PHONE;
 
 public abstract class AppFragment extends Fragment {
 
-    private static final int DESKTOP_SIZE = 28;
+    private static final int DESKTOP_SIZE = 16;
 
     protected static DBService dbService;
     public static Map<String, ApplicationDB> apps;

@@ -29,9 +29,8 @@
     </string-array>
 
     <string-array name="empty_desktop_dialog_action">
-        <item>Аdd application</item>
-        <item>Add url</item>
         <item>Add contact</item>
+        <item>(You can add an application through a grid or list)</item>
     </string-array>
 
     <string name="add_to_desktop">Add to desktop</string>

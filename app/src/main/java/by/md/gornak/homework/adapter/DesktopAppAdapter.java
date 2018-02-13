@@ -43,6 +43,8 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
         int layout = R.layout.item_app;
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
+        int height = parent.getMeasuredHeight() / 4;
+        v.setMinimumHeight(height);
         return new AppViewHolder(v, listener);
     }
 
@@ -76,25 +78,21 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
 
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
-                       // infoList.get(i + 1).setPosition(i);
-                      //  changes.add(infoList.get(i));
+//                        infoList.get(i + 1).setPosition(i);
+//                        changes.add(infoList.get(i));
                         Collections.swap(infoList, i, i + 1);
-                      //  notifyItemMoved(i, i+1);
                     }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-                      //  infoList.get(i - 1).setPosition(i);
-                       // changes.add(infoList.get(i));
+//                        infoList.get(i - 1).setPosition(i);
+//                        changes.add(infoList.get(i));
                         Collections.swap(infoList, i, i-1 );
-                       // notifyItemMoved(i, i-1);
                     }
                 }
-//            }
 
-            //infoList.get(toPosition).setPosition(toPosition);
-           // changes.add(infoList.get(toPosition));
-           // notifyItemChanged(toPosition);
-            mDragStartListener.changePosition(changes);
+//            infoList.get(toPosition).setPosition(toPosition);
+//            changes.add(infoList.get(toPosition));
+//            mDragStartListener.changePosition(changes);
 
             YandexMetrica.reportEvent(mContext.getString(R.string.yandex_desktop_move));
         }

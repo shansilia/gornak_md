@@ -139,10 +139,6 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
                         openContacts(position);
                         break;
                     default:
