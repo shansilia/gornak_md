@@ -24,6 +24,7 @@ import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
 
+import static by.md.gornak.homework.model.ApplicationDB.TYPE.APP;
 import static by.md.gornak.homework.model.ApplicationDB.TYPE.PHONE;
 
 
@@ -62,6 +63,19 @@ public abstract class AppFragment extends Fragment {
         }
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (apps == null) {
+//            apps = dbService.readAll();
+//            appsDesktop = new ArrayList<>(DESKTOP_SIZE);
+//            for (int i = 0; i < DESKTOP_SIZE; i++) {
+//                appsDesktop.add(null);
+//            }
+//            fillAppInfo();
+//        }
+//    }
+
     public static void saveState() {
         dbService.saveAll(apps.values());
     }
@@ -73,6 +87,11 @@ public abstract class AppFragment extends Fragment {
     }
 
     protected void fillAppInfo() {
+        for(ApplicationDB app : apps.values()){
+            if(!app.getType().equals(APP.toString()) && app.isDesktop()) {
+                appsDesktop.set(app.getPosition(), app);
+            }
+        }
         List<ResolveInfo> infoList = getAppList();
         for (ResolveInfo info : infoList) {
             String packageName = info.activityInfo.applicationInfo.packageName;
@@ -182,6 +201,7 @@ public abstract class AppFragment extends Fragment {
     }
 
     protected void appClick(ApplicationDB info) {
+        incFrequency(info.getAppPackage());
         if(info.getType().equals(PHONE.toString())) {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
             startActivity(intent);
@@ -200,7 +220,6 @@ public abstract class AppFragment extends Fragment {
         startActivity(i);
 
         YandexMetrica.reportEvent(getString(R.string.yandex_open_app));
-        incFrequency(activity.applicationInfo.packageName);
     }
 
     public abstract void addApp(String packageName);

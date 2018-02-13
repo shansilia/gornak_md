@@ -17,6 +17,9 @@ public class Tables {
         String FREQUENCY = "frequency";
         String DESKTOP = "desktop";
         String POSITION = "position";
+        String TYPE = "type";
+        String ADD = "additional";
+        String IMAGE = "image";
     }
 
     static final String CREATE_TABLE_SCRIPT =
@@ -26,7 +29,10 @@ public class Tables {
                     Columns.FAVOURITE + " BLOB, " +
                     Columns.FREQUENCY + " REAL, " +
                     Columns.DESKTOP + " BLOB, " +
-                    Columns.POSITION + " REAL" +
+                    Columns.POSITION + " REAL, " +
+                    Columns.TYPE + " TEXT, " +
+                    Columns.ADD + " TEXT, " +
+                    Columns.IMAGE + " BLOB" +
                     ")";
 
     static final String DROP_TABLE_SCRIPT =

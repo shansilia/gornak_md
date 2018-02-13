@@ -34,13 +34,15 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onClick(info);
+                if(info != null) {
+                    mListener.onClick(info);
+                }
             }
         });
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                mListener.onLongClick(info == null ? null : info.getInfo().activityInfo.applicationInfo.packageName, getAdapterPosition());
+                mListener.onLongClick(info == null ? null : info.getAppPackage(), getAdapterPosition());
                 return true;
             }
         });
@@ -55,7 +57,11 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
             byte[] outImage=info.getImage();
             ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
             Bitmap theImage = BitmapFactory.decodeStream(imageStream);
-            icon.setImageBitmap(theImage);
+            if(theImage != null) {
+                icon.setImageBitmap(theImage);
+            } else if(info.getType().equals(ApplicationDB.TYPE.PHONE.toString())) {
+                icon.setImageResource(R.drawable.ic_social);
+            }
 
             name.setText(info.getAppPackage());
         }

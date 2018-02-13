@@ -34,7 +34,7 @@ public abstract class AllAppFragment extends AppFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_app, container, false);
         mRecyclerView = rootView.findViewById(R.id.appList);
-        List<ApplicationDB> data = new ArrayList<>(apps.values());
+        List<ApplicationDB> data = prepareData();
         Collections.sort(data, Sorting.getComparable(getContext()));
         setupRecyclerView(data);
         return rootView;
@@ -62,9 +62,19 @@ public abstract class AllAppFragment extends AppFragment {
     }
 
     public void update() {
-        List<ApplicationDB> data = new ArrayList<>(apps.values());
+        List<ApplicationDB> data = prepareData();
         Collections.sort(data, Sorting.getComparable(getContext()));
         mAdapter.update(data);
+    }
+
+    private List<ApplicationDB> prepareData() {
+        List<ApplicationDB> data = new ArrayList<>();
+        for(ApplicationDB app : apps.values()){
+            if(app.getType().equals(ApplicationDB.TYPE.APP.toString())) {
+                data.add(app);
+            }
+        }
+        return data;
     }
 
     protected abstract void setupRecyclerView(List<ApplicationDB> pkgAppsList);

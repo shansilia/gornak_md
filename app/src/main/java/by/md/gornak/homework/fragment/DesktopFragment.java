@@ -74,8 +74,8 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
                     Uri uriContact = data.getData();
                     ApplicationDB newContact = ContactGenerator.createContact(getActivity(), uriContact);
                     newContact.setPosition(currentPosition);
-                    appsDesktop.add(newContact);
-                    apps.put(newContact.getAppPackage(), newContact);
+                    appsDesktop.set(currentPosition, newContact);
+                    AppFragment.apps.put(newContact.getAppPackage(), newContact);
                     mAdapter.notifyDataSetChanged();
                     break;
             }

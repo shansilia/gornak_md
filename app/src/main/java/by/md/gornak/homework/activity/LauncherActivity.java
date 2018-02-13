@@ -157,7 +157,8 @@ public class LauncherActivity extends AppCompatActivity
                 openSettings();
                 break;
             case R.id.nav_main:
-                openDesktop();
+                Intent intent = new Intent(this, LauncherActivity.class);
+                startActivity(intent);
                 break;
         }
 

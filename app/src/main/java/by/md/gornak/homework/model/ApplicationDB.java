@@ -26,6 +26,17 @@ public class ApplicationDB {
         type = TYPE.APP.toString();
     }
 
+    public ApplicationDB(String appPackage, boolean isFavourite, int frequency, boolean isDesktop, int position, String type, String additionaly, byte[] image) {
+        this.appPackage = appPackage;
+        this.isFavourite = isFavourite;
+        this.frequency = frequency;
+        this.isDesktop = isDesktop;
+        this.position = position;
+        this.type = type;
+        this.additionaly = additionaly;
+        this.image = image;
+    }
+
     public ApplicationDB(ResolveInfo info, String appPackage, int frequency,
                          boolean isDesktop, int position, String type) {
         this.info = info;
