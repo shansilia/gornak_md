@@ -29,6 +29,8 @@ public class DBService {
             contentValues.put(Tables.Columns.PACKAGE, app.getAppPackage());
             contentValues.put(Tables.Columns.FAVOURITE, app.isFavourite());
             contentValues.put(Tables.Columns.FREQUENCY, app.getFrequency());
+            contentValues.put(Tables.Columns.DESKTOP, app.isDesktop());
+            contentValues.put(Tables.Columns.POSITION, app.getPosition());
             try {
                 int id = (int) db.insertWithOnConflict(Tables.TABLE_NAME, null,
                         contentValues, SQLiteDatabase.CONFLICT_IGNORE);
@@ -38,7 +40,6 @@ public class DBService {
                             Tables.Columns.PACKAGE + " = ?",
                             new String[]{app.getAppPackage()});
                 }
-                // db.insert(Tables.TABLE_NAME, null, contentValues);
             } catch (SQLiteException e) {
 
             }

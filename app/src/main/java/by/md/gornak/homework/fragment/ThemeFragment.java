@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.activity.LauncherActivity;
 import by.md.gornak.homework.activity.StartActivity;
 import by.md.gornak.homework.util.Settings;
 

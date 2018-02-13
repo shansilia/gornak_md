@@ -18,7 +18,7 @@ public class ApplicationDB {
         this.isFavourite = false;
         this.frequency = 0;
         this.isDesktop = false;
-        this.position = 0;
+        this.position = -1;
     }
 
     public ApplicationDB(String appPackage, boolean isFavourite, int frequency,

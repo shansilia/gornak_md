@@ -19,10 +19,14 @@
 
     <string name="app_dialog_title">Дальнейшее действие</string>
     <string-array name="app_dialog_action">
+        <item>Добавить на рабочий стол</item>
         <item>Удалить</item>
         <item>Частота: </item>
         <item>Информация</item>
     </string-array>
+
+    <string name="add_to_desktop">Добавить на рабочий стол</string>
+    <string name="delete_from_desktop">Удалить с рабочего стола</string>
 
     <string name="attention">Внимание!</string>
     <string name="exit_warning_text">Вы точно хотите выйти из приложения?</string>
@@ -111,5 +115,6 @@
     <string name="pref_key_light_theme">isLightTheme</string>
     <string name="pref_key_sorting">sorting</string>
     <string name="pref_key_first_start">isFirstStart</string>
+    <string name="desktop_done">Приложение добавлено на рабочий стол</string>
 
 </resources>

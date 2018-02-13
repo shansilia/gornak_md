@@ -22,10 +22,14 @@
 
     <string name="app_dialog_title">Next step</string>
     <string-array name="app_dialog_action">
+        <item>Add to desktop</item>
         <item>Delete</item>
         <item>Frequency: </item>
         <item>Information</item>
     </string-array>
+
+    <string name="add_to_desktop">Add to desktop</string>
+    <string name="delete_from_desktop">Delete from the desktop</string>
 
     <string name="attention">Warning!</string>
     <string name="exit_warning_text">Are you sure you want to exit the application? </string>
@@ -106,5 +110,6 @@
     <string name="yandex_open_profile">open profile</string>
     <string name="yandex_open_app">open app</string>
     <string name="yandex_delete_app">delete app</string>
+    <string name="desktop_error">The desktop is already full</string>
 
 </resources>

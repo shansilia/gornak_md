@@ -20,10 +20,14 @@
 
     <string name="app_dialog_title">الخطوة التالية</string>
     <string-array name="app_dialog_action">
+        <item>إضافة إلى سطح المكتب</item>
         <item>حذف</item>
         <item>فريكونسي: </item>
         <item>إنفورماتيون</item>
     </string-array>
+
+    <string name="add_to_desktop">إضافة إلى سطح المكتب</string>
+    <string name="delete_from_desktop">إزالة من سطح المكتب</string>
 
     <string name="attention">تحذير!</string>
     <string name="exit_warning_text">هل تريد بالتأكيد الخروج من التطبيق؟</string>

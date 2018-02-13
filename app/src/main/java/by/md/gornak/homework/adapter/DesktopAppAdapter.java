@@ -40,6 +40,9 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
 
     @Override
     public void onBindViewHolder(AppViewHolder holder, int position) {
+        if (infoList.get(position) == null) {
+            return;
+        }
         ResolveInfo info = infoList.get(position).getInfo();
         holder.setData(info, packageManager);
     }

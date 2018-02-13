@@ -7,11 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -23,10 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import by.md.gornak.homework.R;
-import by.md.gornak.homework.adapter.DesktopPageAdapter;
-import by.md.gornak.homework.fragment.AppGridFragment;
-import by.md.gornak.homework.fragment.AppListFragment;
-import by.md.gornak.homework.fragment.DesktopFragment;
+import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 import by.md.gornak.homework.util.Settings;
 
@@ -35,9 +32,7 @@ public class LauncherActivity extends AppCompatActivity
 
     public static final String OPEN_SETTINGS = "openSettings";
 
-
-    private ViewPager vpDesktop;
-    private DesktopPageAdapter mAdapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +46,13 @@ public class LauncherActivity extends AppCompatActivity
         if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
             openSettings();
         } else if (getSupportFragmentManager().getFragments().isEmpty()) {
-            vpDesktop.setCurrentItem(1);
+            openDesktop();
         }
 
     }
 
     private void initView() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -73,14 +68,6 @@ public class LauncherActivity extends AppCompatActivity
 
         setAvatar(avatar);
         setAvatarAction(avatar);
-
-        applyPager();
-    }
-
-    private void applyPager() {
-        vpDesktop = findViewById(R.id.vpDesktop);
-        mAdapter = new DesktopPageAdapter(getSupportFragmentManager());
-        vpDesktop.setAdapter(mAdapter);
     }
 
     @Override
@@ -157,24 +144,20 @@ public class LauncherActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_list:
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                AppListFragment fragment = new AppListFragment();
-                transaction.replace(R.id.container, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                MainFragment list = new MainFragment();
+                list.openListFragment();
+                openFragment(list);
                 break;
             case R.id.nav_grid:
-                openGrid();
+                MainFragment fragment = new MainFragment();
+                fragment.openGridFragment();
+                openFragment(fragment);
                 break;
             case R.id.nav_manage:
                 openSettings();
                 break;
             case R.id.nav_main:
-                FragmentTransaction transactionMain = getSupportFragmentManager().beginTransaction();
-                DesktopFragment fragmentMain = new DesktopFragment();
-                transactionMain.replace(R.id.container, fragmentMain);
-                transactionMain.addToBackStack(null);
-                transactionMain.commit();
+                openDesktop();
                 break;
         }
 
@@ -183,17 +166,22 @@ public class LauncherActivity extends AppCompatActivity
         return true;
     }
 
-    private void openGrid() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        AppGridFragment fragment = new AppGridFragment();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void openDesktop() {
+        MainFragment fragment = new MainFragment();
+        fragment.openDesktopFragment();
+        openFragment(fragment);
     }
 
     private void openSettings() {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         SettingsFragment fragment = new SettingsFragment();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
