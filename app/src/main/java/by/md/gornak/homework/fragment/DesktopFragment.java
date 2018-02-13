@@ -77,6 +77,8 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
                     appsDesktop.set(currentPosition, newContact);
                     AppFragment.apps.put(newContact.getAppPackage(), newContact);
                     mAdapter.notifyDataSetChanged();
+
+                    YandexMetrica.reportEvent(getString(R.string.yandex_add_contact));
                     break;
             }
 

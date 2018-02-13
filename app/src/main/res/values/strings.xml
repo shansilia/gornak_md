@@ -111,11 +111,29 @@
 
     <string name="yandex_api_key">167e67b1-0b42-4a65-8e79-b55e94bb50dd</string>
     <string name="yandex_settings">settings</string>
+
     <string name="yandex_start_app">start app</string>
     <string name="yandex_change_settings">change settings</string>
     <string name="yandex_open_profile">open profile</string>
+    <string name="yandex_open_welcome">open welcome</string>
     <string name="yandex_open_app">open app</string>
+    <string name="yandex_open_info">open info</string>
+    <string name="yandex_install_app">install app</string>
+    <string name="yandex_uninstall_app">uninstall app</string>
+    <string name="yandex_change_main_page">change main page</string>
+    <string name="yandex_call">call</string>
     <string name="yandex_delete_app">delete app</string>
+    <string name="yandex_add_desktop">add desktop</string>
+    <string name="yandex_delete_desktop">delete desktop</string>
+    <string name="yandex_show_dialog">show dialog</string>
+    <string name="yandex_theme">theme</string>
+    <string name="yandex_layout">layout</string>
+    <string name="yandex_add_contact">add contact</string>
+    <string name="yandex_desktop_move">desktop move</string>
+    <string name="yandex_save_state">save state</string>
+    <string name="yandex_navigation">navigation</string>
+
+
     <string name="desktop_error">The desktop is already full</string>
 
 </resources>

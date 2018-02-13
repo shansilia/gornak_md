@@ -15,6 +15,5 @@ public class AppListFragment extends AllAppFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new AppAdapter(getContext(), pkgAppsList, false, appListener);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 }

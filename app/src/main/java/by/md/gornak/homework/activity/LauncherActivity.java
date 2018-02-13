@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.yandex.metrica.YandexMetrica;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
@@ -162,6 +164,7 @@ public class LauncherActivity extends AppCompatActivity
                 break;
         }
 
+        YandexMetrica.reportEvent(getString(R.string.yandex_navigation));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

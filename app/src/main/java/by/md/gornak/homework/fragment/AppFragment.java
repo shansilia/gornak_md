@@ -46,6 +46,7 @@ public abstract class AppFragment extends Fragment {
         @Override
         public void onLongClick(String packageName, int position) {
             showDialog(packageName, position);
+            YandexMetrica.reportEvent(getString(R.string.yandex_add_desktop));
         }
     };
 
@@ -62,19 +63,6 @@ public abstract class AppFragment extends Fragment {
             fillAppInfo();
         }
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (apps == null) {
-//            apps = dbService.readAll();
-//            appsDesktop = new ArrayList<>(DESKTOP_SIZE);
-//            for (int i = 0; i < DESKTOP_SIZE; i++) {
-//                appsDesktop.add(null);
-//            }
-//            fillAppInfo();
-//        }
-//    }
 
     public static void saveState() {
         dbService.saveAll(apps.values());
@@ -171,6 +159,7 @@ public abstract class AppFragment extends Fragment {
         myAppSettings.addCategory(Intent.CATEGORY_DEFAULT);
         myAppSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(myAppSettings);
+        YandexMetrica.reportEvent(getString(R.string.yandex_open_info));
     }
 
     protected void addToDesktop(String packageName) {
@@ -182,6 +171,7 @@ public abstract class AppFragment extends Fragment {
                 app.setPosition(i);
                 appsDesktop.set(i, app);
                 Toast.makeText(getContext(), R.string.desktop_done, Toast.LENGTH_SHORT).show();
+                YandexMetrica.reportEvent(getString(R.string.yandex_add_desktop));
                 return;
             }
         }
@@ -192,9 +182,10 @@ public abstract class AppFragment extends Fragment {
         apps.get(packageName).setDesktop(false);
         for (int i = 0; i < appsDesktop.size(); i++) {
             ApplicationDB app = appsDesktop.get(i);
-            if (app.getAppPackage().equals(packageName)) {
+            if (app != null && app.getAppPackage().equals(packageName)) {
                 app.setPosition(-1);
                 appsDesktop.set(i, null);
+                YandexMetrica.reportEvent(getString(R.string.yandex_delete_desktop));
                 return;
             }
         }
@@ -205,6 +196,7 @@ public abstract class AppFragment extends Fragment {
         if(info.getType().equals(PHONE.toString())) {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
             startActivity(intent);
+            YandexMetrica.reportEvent(getString(R.string.yandex_call));
             return;
         }
         ActivityInfo activity = info.getInfo().activityInfo;

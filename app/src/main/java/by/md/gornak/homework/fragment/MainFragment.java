@@ -14,6 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yandex.metrica.YandexMetrica;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.DesktopPageAdapter;
 
@@ -31,12 +36,14 @@ public class MainFragment extends Fragment {
             String data = intent.getDataString();
             if (action.equals(Intent.ACTION_PACKAGE_REMOVED)) {
                 mAdapter.removeApp(data.replace("package:", ""));
+                YandexMetrica.reportEvent(getString(R.string.yandex_uninstall_app));
             } else if (action.equals(Intent.ACTION_PACKAGE_ADDED)) {
                 Intent infoIntent = new Intent();
                 infoIntent.setPackage(data.replace("package:", ""));
                 infoIntent.addCategory(Intent.CATEGORY_LAUNCHER);
                 ResolveInfo result = getContext().getPackageManager().resolveActivity(intent, 0);
                 mAdapter.addApp(result);
+                YandexMetrica.reportEvent(getString(R.string.yandex_install_app));
             }
         }
     };
@@ -60,6 +67,9 @@ public class MainFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 vpDesktop.getAdapter().notifyDataSetChanged();
+                Map<String, Object> eventAttributes = new HashMap<>();
+                eventAttributes.put(getString(R.string.yandex_change_main_page), position);
+                YandexMetrica.reportEvent(getString(R.string.yandex_change_main_page));
             }
 
             @Override
@@ -86,6 +96,7 @@ public class MainFragment extends Fragment {
     public void onPause() {
         super.onPause();
         mAdapter.saveState();
+        YandexMetrica.reportEvent(getContext().getString(R.string.yandex_save_state));
     }
 
     @Override

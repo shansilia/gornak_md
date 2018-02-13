@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yandex.metrica.YandexMetrica;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,6 +95,8 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
            // changes.add(infoList.get(toPosition));
            // notifyItemChanged(toPosition);
             mDragStartListener.changePosition(changes);
+
+            YandexMetrica.reportEvent(mContext.getString(R.string.yandex_desktop_move));
         }
         return true;
     }
