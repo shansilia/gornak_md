@@ -134,6 +134,7 @@
     <string name="yandex_navigation">navigation</string>
 
 
+    <string name="desktop_done">The application has been added to the desktop</string>
     <string name="desktop_error">The desktop is already full</string>
 
 </resources>
