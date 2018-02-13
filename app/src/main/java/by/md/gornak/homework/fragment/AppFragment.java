@@ -1,15 +1,19 @@
 package by.md.gornak.homework.fragment;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -194,9 +198,17 @@ public abstract class AppFragment extends Fragment {
     protected void appClick(ApplicationDB info) {
         incFrequency(info.getAppPackage());
         if(info.getType().equals(PHONE.toString())) {
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
-            startActivity(intent);
-            YandexMetrica.reportEvent(getString(R.string.yandex_call));
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        0);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
+                startActivity(intent);
+                YandexMetrica.reportEvent(getString(R.string.yandex_call));
+            }
             return;
         }
         ActivityInfo activity = info.getInfo().activityInfo;

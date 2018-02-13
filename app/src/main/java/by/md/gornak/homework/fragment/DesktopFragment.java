@@ -1,9 +1,11 @@
 package by.md.gornak.homework.fragment;
 
 
+import android.Manifest;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +14,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -139,10 +143,7 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
                     case 1:
                         break;
                     case 2:
-                        currentPosition = position;
-                        Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
-                                ContactsContract.Contacts.CONTENT_URI);
-                        startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+                        openContacts(position);
                         break;
                     default:
                         break;
@@ -152,6 +153,21 @@ public class DesktopFragment extends AppFragment implements DesktopAppAdapter.On
         });
 
         builder.create().show();
+    }
+
+    private void openContacts(int position) {
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    0);
+        } else {
+            currentPosition = position;
+            Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
+                    ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+        }
     }
 
     protected void openInfoApp(String packageName) {
