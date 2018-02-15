@@ -3,7 +3,6 @@ package by.md.gornak.homework.adapter;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,9 +17,10 @@ import java.util.List;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.holder.AppViewHolder;
+import by.md.gornak.homework.adapter.holder.DesktopAppViewHolder;
 import by.md.gornak.homework.model.ApplicationDB;
 
-public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
+public class DesktopAppAdapter extends RecyclerView.Adapter<DesktopAppViewHolder> {
 
     private List<ApplicationDB> infoList;
     private Context mContext;
@@ -39,17 +39,17 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
     }
 
     @Override
-    public AppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layout = R.layout.item_app;
+    public DesktopAppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layout = R.layout.item_desktop_app;
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
         int height = parent.getMeasuredHeight() / 4;
         v.setMinimumHeight(height);
-        return new AppViewHolder(v, listener);
+        return new DesktopAppViewHolder(v, listener, mContext);
     }
 
     @Override
-    public void onBindViewHolder(final AppViewHolder holder, int position) {
+    public void onBindViewHolder(final DesktopAppViewHolder holder, int position) {
         if (infoList.get(position) == null) {
             return;
         }
@@ -78,21 +78,13 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<AppViewHolder> {
 
                 if (fromPosition < toPosition) {
                     for (int i = fromPosition; i < toPosition; i++) {
-//                        infoList.get(i + 1).setPosition(i);
-//                        changes.add(infoList.get(i));
                         Collections.swap(infoList, i, i + 1);
                     }
                 } else {
                     for (int i = fromPosition; i > toPosition; i--) {
-//                        infoList.get(i - 1).setPosition(i);
-//                        changes.add(infoList.get(i));
                         Collections.swap(infoList, i, i-1 );
                     }
                 }
-
-//            infoList.get(toPosition).setPosition(toPosition);
-//            changes.add(infoList.get(toPosition));
-//            mDragStartListener.changePosition(changes);
 
             YandexMetrica.reportEvent(mContext.getString(R.string.yandex_desktop_move));
         }

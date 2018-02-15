@@ -61,7 +61,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(START_ITEM, vpHello.getCurrentItem());
+        outState.putInt(START_ITEM, vpHello == null ? 0 : vpHello.getCurrentItem());
     }
 
     private void applyPager() {
