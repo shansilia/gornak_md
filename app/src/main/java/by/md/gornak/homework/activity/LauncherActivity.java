@@ -24,6 +24,9 @@ import android.widget.ImageView;
 
 import com.yandex.metrica.YandexMetrica;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
@@ -110,7 +113,7 @@ public class LauncherActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if (getSupportFragmentManager().getFragments().size() < 2) {
+        } else if (getSupportFragmentManager().getFragments().size() <= 4) {
             showCloseDialog();
         } else {
             super.onBackPressed();
@@ -126,11 +129,17 @@ public class LauncherActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         finish();
+                        Map<String, Object> eventAttributes = new HashMap<String, Object>();
+                        eventAttributes.put(getString(R.string.yandex_answer), "ok");
+                        YandexMetrica.reportEvent(getString(R.string.yandex_close_dialog));
                     }
                 })
                 .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Map<String, Object> eventAttributes = new HashMap<String, Object>();
+                                eventAttributes.put(getString(R.string.yandex_answer), "cancel");
+                                YandexMetrica.reportEvent(getString(R.string.yandex_close_dialog));
                                 dialog.cancel();
                             }
                         });

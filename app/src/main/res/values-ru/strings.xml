@@ -127,6 +127,7 @@
 
     <string name="yandex_api_key">167e67b1-0b42-4a65-8e79-b55e94bb50dd</string>
     <string name="yandex_settings">settings</string>
+    <string name="yandex_answer">answer</string>
 
     <string name="yandex_start_app">start app</string>
     <string name="yandex_change_settings">change settings</string>
@@ -148,5 +149,7 @@
     <string name="yandex_desktop_move">desktop move</string>
     <string name="yandex_save_state">save state</string>
     <string name="yandex_navigation">navigation</string>
+    <string name="yandex_close_dialog">close dialog</string>
+    <string name="yandex_init_data">init data</string>
 
 </resources>

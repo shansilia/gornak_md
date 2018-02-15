@@ -91,7 +91,7 @@ public class LayoutFragment extends Fragment {
 
             Map<String, Object> eventAttributes = new HashMap<>();
             eventAttributes.put(getString(R.string.pref_key_layout), size == STANDARD);
-            YandexMetrica.reportEvent(getString(R.string.yandex_change_main_page));
+            YandexMetrica.reportEvent(getString(R.string.yandex_layout));
         }
     }
 }
