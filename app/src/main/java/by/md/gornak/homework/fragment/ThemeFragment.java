@@ -66,7 +66,7 @@ public class ThemeFragment extends Fragment {
 
             Map<String, Object> eventAttributes = new HashMap<>();
             eventAttributes.put(getString(R.string.pref_key_light_theme), isLight);
-            YandexMetrica.reportEvent(getString(R.string.yandex_change_main_page));
+            YandexMetrica.reportEvent(getString(R.string.yandex_theme));
 
             final Intent intent = getActivity().getIntent();
             intent.putExtra(StartActivity.START_ITEM, 1);

@@ -39,7 +39,7 @@ public class StartActivity extends AppCompatActivity {
             return;
         }
 
-        YandexMetrica.reportEvent(getString(R.string.yandex_add_desktop));
+        YandexMetrica.reportEvent(getString(R.string.yandex_open_welcome));
         if (Settings.getBooleanValue(this, R.string.pref_key_first_start, true)) {
             PreferenceManager.setDefaultValues(this, R.xml.pref, false);
             Settings.setBooleanValue(this, R.string.pref_key_first_start, false);
@@ -61,7 +61,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(START_ITEM, vpHello.getCurrentItem());
+        outState.putInt(START_ITEM, vpHello == null ? 0 : vpHello.getCurrentItem());
     }
 
     private void applyPager() {

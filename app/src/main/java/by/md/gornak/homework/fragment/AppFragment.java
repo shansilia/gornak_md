@@ -50,7 +50,7 @@ public abstract class AppFragment extends Fragment {
         @Override
         public void onLongClick(String packageName, int position) {
             showDialog(packageName, position);
-            YandexMetrica.reportEvent(getString(R.string.yandex_add_desktop));
+            YandexMetrica.reportEvent(getString(R.string.yandex_show_dialog));
         }
     };
 
@@ -97,6 +97,8 @@ public abstract class AppFragment extends Fragment {
                 apps.put(packageName, new ApplicationDB(info));
             }
         }
+
+        YandexMetrica.reportEvent(getString(R.string.yandex_init_data));
     }
 
     protected void incFrequency(String packageName) {
@@ -108,7 +110,6 @@ public abstract class AppFragment extends Fragment {
 
     protected void showDialog(final String packageName, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
         builder.setTitle(R.string.app_dialog_title);
 
         String[] actions = getResources().getStringArray(R.array.app_dialog_action);
@@ -202,7 +203,7 @@ public abstract class AppFragment extends Fragment {
                     Manifest.permission.CALL_PHONE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.READ_CONTACTS},
+                        new String[]{Manifest.permission.CALL_PHONE},
                         0);
             } else {
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.getAdditionaly()));
