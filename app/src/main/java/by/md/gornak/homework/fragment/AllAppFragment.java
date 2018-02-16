@@ -22,13 +22,6 @@ public abstract class AllAppFragment extends AppFragment {
     protected AppAdapter mAdapter;
     protected RecyclerView mRecyclerView;
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,27 +33,6 @@ public abstract class AllAppFragment extends AppFragment {
         return rootView;
     }
 
-
-    @Override
-    public void addApp(String packageName) {
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public int removeApp(String packageName) {
-        int pos = 0;
-        for (ApplicationDB info : apps.values()) {
-            if (info.getAppPackage().equals(packageName)) {
-                mAdapter.remove(info);
-                break;
-            }
-            pos++;
-        }
-        apps.remove(packageName);
-        dbService.remove(packageName);
-        return pos;
-    }
-
     public void update() {
         List<ApplicationDB> data = prepareData();
         Collections.sort(data, Sorting.getComparable(getContext()));
@@ -69,8 +41,8 @@ public abstract class AllAppFragment extends AppFragment {
 
     private List<ApplicationDB> prepareData() {
         List<ApplicationDB> data = new ArrayList<>();
-        for(ApplicationDB app : apps.values()){
-            if(app.getType().equals(ApplicationDB.TYPE.APP.toString())) {
+        for (ApplicationDB app : apps.values()) {
+            if (app.getType().equals(ApplicationDB.TYPE.APP.toString())) {
                 data.add(app);
             }
         }
