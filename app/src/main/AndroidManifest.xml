@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".LauncherApplication"
@@ -26,6 +27,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ProfileActivity"
+            android:parentActivityName=".activity.LauncherActivity"/>
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:theme="@style/AppTheme"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="052db005a5c0cf194c3cfc1b96df157b71480e3b" />
@@ -33,11 +40,10 @@
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.LauncherActivity"/>
-        <activity
-            android:name=".activity.LauncherActivity"
-            android:theme="@style/AppTheme"/>
+        <service
+            android:name=".service.ImageLoaderService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+                </service>
     </application>
 
 

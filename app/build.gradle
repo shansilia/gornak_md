@@ -38,7 +38,9 @@ android {
         versionName "3.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "601e62f573e1400a824c680adad69ddc"]
+        renderscriptSupportModeEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false

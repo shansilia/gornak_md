@@ -1,11 +1,18 @@
 package by.md.gornak.homework.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +24,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +39,9 @@ import java.util.Map;
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
+import by.md.gornak.homework.service.ImageLoaderService;
+import by.md.gornak.homework.service.ImageSaver;
+import by.md.gornak.homework.util.BlurImage;
 import by.md.gornak.homework.util.Settings;
 
 public class LauncherActivity extends AppCompatActivity
@@ -38,6 +50,25 @@ public class LauncherActivity extends AppCompatActivity
     public static final String OPEN_SETTINGS = "openSettings";
 
     private Toolbar toolbar;
+    private ConstraintLayout container;
+
+    private UpdateImageBroadcastReceiver mUpdateImageBroadcastReceiver;
+
+    private class UpdateImageBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            String action = intent.getAction();
+            if (ImageLoaderService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
+                final String imageName = intent.getStringExtra(ImageLoaderService.BROADCAST_PARAM_IMAGE);
+                if (TextUtils.isEmpty(imageName) == false) {
+                    final Bitmap bitmap = ImageSaver.getInstance().loadImage(getApplicationContext(), imageName);
+                    final Drawable drawable = new BitmapDrawable(getResources(), BlurImage.blur(context, bitmap));
+                    setDrawable(drawable);
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +78,10 @@ public class LauncherActivity extends AppCompatActivity
         setContentView(R.layout.activity_launcher);
 
         initView();
+
+        mUpdateImageBroadcastReceiver = new UpdateImageBroadcastReceiver();
+        Intent intent = new Intent(ImageLoaderService.ACTION_LOAD_IMAGE);
+        ImageLoaderService.enqueueWork(getApplicationContext(), intent);
 
         if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
             openSettings();
@@ -58,6 +93,7 @@ public class LauncherActivity extends AppCompatActivity
 
     private void initView() {
         toolbar = findViewById(R.id.toolbar);
+        container = findViewById(R.id.container);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -73,6 +109,19 @@ public class LauncherActivity extends AppCompatActivity
 
         setAvatar(avatar);
         setAvatarAction(avatar);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mUpdateImageBroadcastReceiver,
+                new IntentFilter(ImageLoaderService.BROADCAST_ACTION_UPDATE_IMAGE));
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(mUpdateImageBroadcastReceiver);
+        super.onPause();
     }
 
     @Override
@@ -204,5 +253,14 @@ public class LauncherActivity extends AppCompatActivity
     private void openProfile() {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
+    }
+
+    private void setDrawable(Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            container.setBackground(drawable);
+        } else {
+            container.setBackgroundDrawable(drawable);
+        }
+
     }
 }
