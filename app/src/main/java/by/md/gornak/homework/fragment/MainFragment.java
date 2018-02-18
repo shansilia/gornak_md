@@ -79,6 +79,7 @@ public class MainFragment extends Fragment {
         mAdapter = new DesktopPageAdapter(getActivity().getSupportFragmentManager());
         vpDesktop.setAdapter(mAdapter);
         vpDesktop.setCurrentItem(curPage);
+        vpDesktop.setOffscreenPageLimit(4);
     }
 
     protected void initAction() {
