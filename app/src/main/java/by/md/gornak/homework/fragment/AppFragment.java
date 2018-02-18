@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,17 +28,15 @@ import by.md.gornak.homework.adapter.holder.AppViewHolder;
 import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.model.ApplicationDB;
 
-import static by.md.gornak.homework.model.ApplicationDB.TYPE.APP;
 import static by.md.gornak.homework.model.ApplicationDB.TYPE.PHONE;
 
 
 public abstract class AppFragment extends Fragment {
 
-    private static final int DESKTOP_SIZE = 16;
 
-    protected static DBService dbService;
-    public static Map<String, ApplicationDB> apps;
-    protected static List<ApplicationDB> appsDesktop;
+    protected DBService dbService;
+    public Map<String, ApplicationDB> apps;
+    protected List<ApplicationDB> appsDesktop;
 
 
     protected AppViewHolder.OnAppClickListener appListener = new AppViewHolder.OnAppClickListener() {
@@ -58,47 +56,16 @@ public abstract class AppFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbService = new DBService(getContext());
-        if (apps == null) {
-            apps = dbService.readAll();
-            appsDesktop = new ArrayList<>(DESKTOP_SIZE);
-            for (int i = 0; i < DESKTOP_SIZE; i++) {
-                appsDesktop.add(null);
-            }
-            fillAppInfo();
-        }
+        apps = new HashMap<>();
+        appsDesktop = new ArrayList();
     }
 
-    public static void saveState() {
-        dbService.saveAll(apps.values());
-    }
-
-    protected List<ResolveInfo> getAppList() {
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        return getContext().getPackageManager().queryIntentActivities(mainIntent, 0);
-    }
-
-    protected void fillAppInfo() {
-        for(ApplicationDB app : apps.values()){
-            if(!app.getType().equals(APP.toString()) && app.isDesktop()) {
-                appsDesktop.set(app.getPosition(), app);
-            }
+    public void setData(Map<String, ApplicationDB> apps, List<ApplicationDB> appsDesktop) {
+        this.apps = apps;
+        this.appsDesktop = appsDesktop;
+        if(getContext() != null) {
+            update();
         }
-        List<ResolveInfo> infoList = getAppList();
-        for (ResolveInfo info : infoList) {
-            String packageName = info.activityInfo.applicationInfo.packageName;
-            if (apps.containsKey(packageName)) {
-                ApplicationDB app = apps.get(packageName);
-                app.setInfo(info);
-                if (app.isDesktop()) {
-                    appsDesktop.set(app.getPosition(), app);
-                }
-            } else {
-                apps.put(packageName, new ApplicationDB(info));
-            }
-        }
-
-        YandexMetrica.reportEvent(getString(R.string.yandex_init_data));
     }
 
     protected void incFrequency(String packageName) {
@@ -198,7 +165,7 @@ public abstract class AppFragment extends Fragment {
 
     protected void appClick(ApplicationDB info) {
         incFrequency(info.getAppPackage());
-        if(info.getType().equals(PHONE.toString())) {
+        if (info.getType().equals(PHONE.toString())) {
             if (ContextCompat.checkSelfPermission(getActivity(),
                     Manifest.permission.CALL_PHONE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -226,10 +193,6 @@ public abstract class AppFragment extends Fragment {
 
         YandexMetrica.reportEvent(getString(R.string.yandex_open_app));
     }
-
-    public abstract void addApp(String packageName);
-
-    public abstract int removeApp(String packageName);
 
     protected abstract void update();
 

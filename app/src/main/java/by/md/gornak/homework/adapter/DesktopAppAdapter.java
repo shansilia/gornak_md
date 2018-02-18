@@ -91,6 +91,12 @@ public class DesktopAppAdapter extends RecyclerView.Adapter<DesktopAppViewHolder
         return true;
     }
 
+    public void update(List<ApplicationDB> info) {
+        infoList.clear();
+        infoList.addAll(info);
+        notifyDataSetChanged();
+    }
+
 
     public interface OnDragListener {
 
