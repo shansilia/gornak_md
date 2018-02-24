@@ -11,9 +11,12 @@ import android.support.v4.app.JobIntentService;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class ImageLoaderService extends JobIntentService {
+import java.util.List;
 
-    private static final String TAG = "Shad";
+import by.md.gornak.homework.R;
+import by.md.gornak.homework.util.Settings;
+
+public class ImageLoaderService extends JobIntentService {
 
     public static final int JOB_ID_LOAD_IMAGE = 21234;
 
@@ -25,45 +28,54 @@ public class ImageLoaderService extends JobIntentService {
 
 
     private final ImageLoader mImageLoader;
+    private static Context mContext;
 
     public ImageLoaderService() {
         mImageLoader = new ImageLoader();
     }
 
     public static void enqueueWork(Context context, Intent work) {
-        Log.d(TAG, "ImageLoaderService#enqueueWork() with intent = " + work);
+        mContext = context;
         enqueueWork(context, ImageLoaderService.class, JOB_ID_LOAD_IMAGE, work);
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.d(TAG, "ImageLoaderService#onCreate()");
     }
 
     @Override
     protected void onHandleWork(@NonNull final Intent intent) {
         String action = intent.getAction();
-        Log.d(TAG, "ImageLoaderService#onHandleWork() with action = " + action);
 
         if (ACTION_LOAD_IMAGE.equals(action)) {
-            final String imageUrl = mImageLoader.getImageUrl();
-            if (TextUtils.isEmpty(imageUrl) == false) {
-                final Bitmap bitmap = mImageLoader.loadBitmap(imageUrl);
-                final String imageName = "myImage.png";
-                ImageSaver.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
+            // if (TextUtils.isEmpty(imageUrl) == false) {
+            int index = Settings.getInt(mContext, R.string.pref_key_image_index, -1);
+            Settings.setInt(mContext, R.string.pref_key_image_index, index + 1);
+            String imageName = "0.png";
+            if (index == -1) {
+                final List<String> imageUrls = mImageLoader.getImageUrls();
 
-                final Intent broadcastIntent = new Intent(BROADCAST_ACTION_UPDATE_IMAGE);
-                broadcastIntent.putExtra(BROADCAST_PARAM_IMAGE, imageName);
-                sendBroadcast(broadcastIntent);
+                int i = 0;
+
+                for (String imageUrl : imageUrls) {
+                    final Bitmap bitmap = mImageLoader.loadBitmap(imageUrl);
+                    ImageSaver.getInstance().saveImage(getApplicationContext(), bitmap, i + ".png");
+                    if(i == 0) {
+                        updateImage(imageName);
+                    }
+                    i++;
+                }
+
+            } else {
+                imageName = index + ".png";
+                updateImage(imageName);
             }
+
+            // }
         }
     }
 
-    @Override
-    public void onDestroy() {
-        Log.d(TAG, "ImageLoaderService#onDestroy()");
-        super.onDestroy();
+    protected void updateImage(String imageName) {
+
+        final Intent broadcastIntent = new Intent(BROADCAST_ACTION_UPDATE_IMAGE);
+        broadcastIntent.putExtra(BROADCAST_PARAM_IMAGE, imageName);
+        sendBroadcast(broadcastIntent);
     }
 }
 

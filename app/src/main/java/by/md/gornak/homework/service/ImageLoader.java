@@ -81,7 +81,7 @@ public class ImageLoader {
     }
 
     @NonNull
-    private List<String> getImageUrls() {
+    public List<String> getImageUrls() {
         if (mImageUrls.isEmpty()) {
             try {
                 final Calendar calendar = Calendar.getInstance();

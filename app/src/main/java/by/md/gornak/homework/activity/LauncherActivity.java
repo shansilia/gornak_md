@@ -41,6 +41,7 @@ import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.fragment.SettingsFragment;
 import by.md.gornak.homework.service.ImageLoaderService;
 import by.md.gornak.homework.service.ImageSaver;
+import by.md.gornak.homework.service.UpdateImageBroadcastReceiver;
 import by.md.gornak.homework.util.BlurImage;
 import by.md.gornak.homework.util.Settings;
 
@@ -54,22 +55,6 @@ public class LauncherActivity extends AppCompatActivity
 
     private UpdateImageBroadcastReceiver mUpdateImageBroadcastReceiver;
 
-    private class UpdateImageBroadcastReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            String action = intent.getAction();
-            if (ImageLoaderService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
-                final String imageName = intent.getStringExtra(ImageLoaderService.BROADCAST_PARAM_IMAGE);
-                if (TextUtils.isEmpty(imageName) == false) {
-                    final Bitmap bitmap = ImageSaver.getInstance().loadImage(getApplicationContext(), imageName);
-                    final Drawable drawable = new BitmapDrawable(getResources(), BlurImage.blur(context, bitmap));
-                    setDrawable(drawable);
-                }
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(Settings.getStringValue(this, R.string.pref_key_light_theme).equals("true") ?
@@ -79,9 +64,12 @@ public class LauncherActivity extends AppCompatActivity
 
         initView();
 
-        mUpdateImageBroadcastReceiver = new UpdateImageBroadcastReceiver();
-        Intent intent = new Intent(ImageLoaderService.ACTION_LOAD_IMAGE);
-        ImageLoaderService.enqueueWork(getApplicationContext(), intent);
+        mUpdateImageBroadcastReceiver = new UpdateImageBroadcastReceiver(new UpdateImageBroadcastReceiver.UpdateListener() {
+            @Override
+            public void setDrawable(Drawable drawable) {
+                LauncherActivity.this.setDrawable(drawable);
+            }
+        });
 
         if (getIntent().getBooleanExtra(OPEN_SETTINGS, false)) {
             openSettings();

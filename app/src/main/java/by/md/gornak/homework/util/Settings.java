@@ -4,6 +4,8 @@ package by.md.gornak.homework.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 import by.md.gornak.homework.R;
 
 public class Settings {
@@ -28,6 +30,16 @@ public class Settings {
     public static void setBooleanValue(Context context, int idParamName, boolean newValue) {
         final SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putBoolean(context.getString(idParamName), newValue);
+        editor.apply();
+    }
+
+    public static int getInt(Context context, int idParamName, int defaultValue) {
+        return getSharedPreferences(context).getInt(context.getString(idParamName), defaultValue);
+    }
+
+    public static void setInt(Context context, int idParamName, int newValue) {
+        final SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putInt(context.getString(idParamName), newValue);
         editor.apply();
     }
 }

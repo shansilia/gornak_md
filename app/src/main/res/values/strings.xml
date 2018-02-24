@@ -107,6 +107,7 @@
     <string name="pref_key_light_theme">isLightTheme</string>
     <string name="pref_key_sorting">sorting</string>
     <string name="pref_key_first_start">isFirstStart</string>
+    <string name="pref_key_image_index" translatable="false">imageIndex</string>
 
     <string name="yandex_api_key">167e67b1-0b42-4a65-8e79-b55e94bb50dd</string>
     <string name="yandex_settings">settings</string>
