@@ -7,8 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.yandex.metrica.YandexMetrica;
+import com.yandex.metrica.push.YandexMetricaPush;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,6 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Fabric.with(this, new Crashlytics());
         YandexMetrica.reportEvent(getString(R.string.yandex_start_app));
         if (!Settings.getBooleanValue(this, R.string.pref_key_show_welcome, true)) {
             super.onCreate(savedInstanceState);

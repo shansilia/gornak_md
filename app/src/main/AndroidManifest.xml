@@ -26,18 +26,32 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ProfileActivity"
+            android:parentActivityName=".activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="app" android:host="open.profile" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:theme="@style/AppTheme"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="052db005a5c0cf194c3cfc1b96df157b71480e3b" />
         <meta-data
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="${HOCKEYAPP_APP_ID}" />
+        <meta-data android:name="ymp_firebase_default_app_id" android:value="launcher-90720"/>
+        <meta-data android:name="ymp_gcm_default_sender_id" android:value="number:339277365584"/>
 
-        <activity android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.LauncherActivity"/>
-        <activity
-            android:name=".activity.LauncherActivity"
-            android:theme="@style/AppTheme"/>
+        <receiver android:name=".service.SilentPushReceiver">
+            <intent-filter>
+                <action android:name="by.md.gornak.homework.action.ymp.SILENT_PUSH_RECEIVE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 
