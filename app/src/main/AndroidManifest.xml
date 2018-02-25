@@ -27,7 +27,13 @@
         </activity>
 
         <activity android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.LauncherActivity"/>
+            android:parentActivityName=".activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="app" android:host="open.profile" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.LauncherActivity"
             android:theme="@style/AppTheme"/>
