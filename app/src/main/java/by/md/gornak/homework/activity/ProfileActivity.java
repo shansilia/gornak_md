@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yandex.metrica.YandexMetrica;
 
@@ -24,10 +26,24 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        setAvatar();
-        setupToolbar();
+        initView();
 
         YandexMetrica.reportEvent(getString(R.string.yandex_open_profile));
+    }
+
+    private void initView() {
+        LinearLayout llNews = findViewById(R.id.news);
+        String news = Settings.getStringValue(this, R.string.pref_key_news);
+        if(news == null) {
+            llNews.setVisibility(View.GONE);
+        } else {
+            llNews.setVisibility(View.VISIBLE);
+            TextView txtNews = findViewById(R.id.newsText);
+            txtNews.setText(news);
+        }
+
+        setAvatar();
+        setupToolbar();
     }
 
     private void setupToolbar() {
