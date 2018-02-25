@@ -177,10 +177,11 @@ public class MainFragment extends Fragment {
     }
 
     class AppLoader extends AsyncTask<Void, Void, Void> {
+        public Map<String, ApplicationDB> buffer;
 
         @Override
         protected Void doInBackground(Void... voids) {
-            apps = dbService.readAll();
+            buffer = dbService.readAll();
             for (int i = 0; i < DESKTOP_SIZE; i++) {
                 appsDesktop.add(null);
             }
@@ -204,9 +205,10 @@ public class MainFragment extends Fragment {
             List<ResolveInfo> infoList = getAppList();
             for (ResolveInfo info : infoList) {
                 String packageName = info.activityInfo.applicationInfo.packageName;
-                if (apps.containsKey(packageName)) {
-                    ApplicationDB app = apps.get(packageName);
+                if (buffer.containsKey(packageName)) {
+                    ApplicationDB app = buffer.get(packageName);
                     app.setInfo(info);
+                    apps.put(packageName, app);
                     if (app.isDesktop()) {
                         appsDesktop.set(app.getPosition(), app);
                     }
