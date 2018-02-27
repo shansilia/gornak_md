@@ -28,26 +28,25 @@ public class InstrumentedTest {
 
     private final Context context = InstrumentationRegistry.getTargetContext();
 
-    private String test;
     private SharedPreferences sharedPreferences;
 
     @Before
     public void start() {
-        test = "test";
         sharedPreferences =
                 context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE);
     }
 
     @Test
     public void saveStringPref() {
-        Settings.setStringValue(context, R.string.pref_key_layout, test);
-        assertEquals(test, sharedPreferences.getString(context.getString(R.string.pref_key_layout), null));
+        String test = "true";
+        Settings.setStringValue(context, R.string.pref_key_light_theme, test);
+        assertEquals(test, sharedPreferences.getString(context.getString(R.string.pref_key_light_theme), null));
     }
 
     @Test
     public void getStringPref() {
-        String buffer = Settings.getStringValue(context, R.string.pref_key_layout);
-        assertEquals(buffer, sharedPreferences.getString(context.getString(R.string.pref_key_layout), null));
+        String buffer = Settings.getStringValue(context, R.string.pref_key_light_theme);
+        assertEquals(buffer, sharedPreferences.getString(context.getString(R.string.pref_key_light_theme), null));
     }
 
     @Test

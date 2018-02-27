@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import by.md.gornak.homework.activity.LauncherActivity;
+import by.md.gornak.homework.db.DBService;
 import by.md.gornak.homework.fragment.MainFragment;
 import by.md.gornak.homework.model.ApplicationDB;
 import by.md.gornak.homework.util.ContactGenerator;
@@ -128,12 +130,61 @@ public class UnitTest {
         assertTrue(appTest.get(appTest.size()-1).getFrequency() < appTest.get(0).getFrequency());
     }
 
-//    @Test
-//    public void sortingAZ() throws Exception {
-//        Settings.setStringValue(context, R.string.pref_key_sorting, Sorting.AZ);
-//
-//    }
-    //sorting az za date start
-    //saving_pref setbool getbool setstring getstring
-    //db saving remove
+    @Test
+    public void dbSave() {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+        List<ApplicationDB> appTest = new ArrayList<>();
+        for (ResolveInfo info : list) {
+            ApplicationDB app = new ApplicationDB(info);
+            appTest.add(app);
+        }
+
+        DBService service = new DBService(context);
+        service.saveAll(appTest);
+        Map<String, ApplicationDB> appMap = service.readAll();
+        assertEquals(appTest.size(), appMap.size());
+    }
+
+    @Test
+    public void dbRemove() {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+        List<ApplicationDB> appTest = new ArrayList<>();
+        for (ResolveInfo info : list) {
+            ApplicationDB app = new ApplicationDB(info);
+            appTest.add(app);
+        }
+
+        DBService service = new DBService(context);
+        service.saveAll(appTest);
+        service.remove(appTest.get(0).getAppPackage());
+        Map<String, ApplicationDB> appMap = service.readAll();
+        assertFalse(appMap.containsKey(appTest.get(0).getAppPackage()));
+    }
+
+    @Test
+    public void dbChangeApp() {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+        List<ApplicationDB> appTest = new ArrayList<>();
+        for (ResolveInfo info : list) {
+            ApplicationDB app = new ApplicationDB(info);
+            appTest.add(app);
+        }
+
+        DBService service = new DBService(context);
+        service.saveAll(appTest);
+        int test = 10;
+        appTest.get(0).setFrequency(test);
+        service.saveAll(appTest);
+        Map<String, ApplicationDB> appMap = service.readAll();
+        assertEquals(appMap.get(appTest.get(0).getAppPackage()).getFrequency(), test);
+    }
 }
