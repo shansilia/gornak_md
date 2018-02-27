@@ -5,19 +5,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.yandex.metrica.YandexMetrica;
-import com.yandex.metrica.push.YandexMetricaPush;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import by.md.gornak.homework.R;
 import by.md.gornak.homework.adapter.HelloPageAdapter;
 import by.md.gornak.homework.util.Settings;
+import by.md.gornak.homework.view.PageIndicatorView;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -26,8 +20,7 @@ public class StartActivity extends AppCompatActivity {
 
     private ViewPager vpHello;
     private HelloPageAdapter mAdapter;
-    private List<RadioButton> rbPage;
-    private RadioGroup rgPage;
+    private PageIndicatorView indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +59,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void applyPager() {
-
+        indicator = findViewById(R.id.rgPage);
         vpHello = findViewById(R.id.vpHello);
         mAdapter = new HelloPageAdapter(getSupportFragmentManager());
         vpHello.setAdapter(mAdapter);
@@ -77,12 +70,7 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                int i = 0;
-                for (RadioButton rb : rbPage) {
-                    rb.setScaleX(i == position ? 1f : 0.5f);
-                    rb.setScaleY(i == position ? 1f : 0.5f);
-                    i++;
-                }
+                indicator.setCurrentPage(position + 1);
             }
 
             @Override
@@ -94,15 +82,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void initRadioButton() {
-        rgPage = findViewById(R.id.rgPage);
-        rbPage = new ArrayList<>();
-        for (int i = 0; i < mAdapter.getCount(); i++) {
-            RadioButton rb = new RadioButton(this);
-            rb.setButtonDrawable(R.drawable.ic_big_point);
-            rb.setScaleX(i == 0 ? 1f : 0.5f);
-            rb.setScaleY(i == 0 ? 1f : 0.5f);
-            rgPage.addView(rb);
-            rbPage.add(rb);
-        }
+        indicator.setPageCount(mAdapter.getCount());
+        indicator.setCurrentPage(1);
     }
 }
