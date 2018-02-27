@@ -52,7 +52,13 @@ public class Sorting {
                         .getPackageInfo(b.getAppPackage(), 0)
                         .firstInstallTime;
 
-                return (int) (second - first);
+                if(second > first) {
+                    return 1;
+                } else if(first > second) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             } catch (PackageManager.NameNotFoundException e) {
                 return 0;
             }
