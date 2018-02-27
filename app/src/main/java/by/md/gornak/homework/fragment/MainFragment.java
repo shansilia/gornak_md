@@ -197,11 +197,6 @@ public class MainFragment extends Fragment {
 
 
         protected void fillAppInfo() {
-            for (ApplicationDB app : apps.values()) {
-                if (!app.getType().equals(APP.toString()) && app.isDesktop()) {
-                    appsDesktop.set(app.getPosition(), app);
-                }
-            }
             List<ResolveInfo> infoList = getAppList();
             for (ResolveInfo info : infoList) {
                 String packageName = info.activityInfo.applicationInfo.packageName;
@@ -214,6 +209,11 @@ public class MainFragment extends Fragment {
                     }
                 } else {
                     apps.put(packageName, new ApplicationDB(info));
+                }
+            }
+            for (ApplicationDB app : apps.values()) {
+                if (!app.getType().equals(APP.toString()) && app.isDesktop()) {
+                    appsDesktop.set(app.getPosition(), app);
                 }
             }
 
