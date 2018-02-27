@@ -76,7 +76,9 @@ public class UnitTest {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-
+        if(list.size() < 2) {
+            return;
+        }
         List<ApplicationDB> appAZ = new ArrayList<>();
         List<ApplicationDB> appZA = new ArrayList<>();
         for (ResolveInfo info : list) {
@@ -88,7 +90,7 @@ public class UnitTest {
         Collections.sort(appAZ, Sorting.getComparable(context));
         sharedPreferences.edit().putString(context.getString(R.string.pref_key_sorting), Sorting.ZA).commit();
         Collections.sort(appZA, Sorting.getComparable(context));
-        assertNotEquals(appAZ.get(0), appZA.get(0));
+        assertFalse(appAZ.get(0).equals(appZA.get(0)));
         assertEquals(appAZ.get(0), appZA.get(appZA.size()-1));
     }
 
@@ -97,7 +99,9 @@ public class UnitTest {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-
+        if(list.size() < 2) {
+            return;
+        }
         List<ApplicationDB> appTest = new ArrayList<>();
         List<ApplicationDB> appCompare = new ArrayList<>();
         for (ResolveInfo info : list) {
@@ -112,10 +116,14 @@ public class UnitTest {
     }
 
     @Test
-    public void sortingDate() {
+    public void sortingStart() {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+        if(list.size() < 2) {
+            return;
+        }
 
         List<ApplicationDB> appTest = new ArrayList<>();
         int fr = list.size();
