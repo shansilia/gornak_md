@@ -1,14 +1,14 @@
 package by.md.gornak.homework.adapter;
 
 
-import android.content.pm.ResolveInfo;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import by.md.gornak.homework.fragment.AppFragment;
 import by.md.gornak.homework.fragment.AppGridFragment;
@@ -16,7 +16,7 @@ import by.md.gornak.homework.fragment.AppListFragment;
 import by.md.gornak.homework.fragment.DesktopFragment;
 import by.md.gornak.homework.model.ApplicationDB;
 
-public class DesktopPageAdapter extends FragmentPagerAdapter {
+public class DesktopPageAdapter extends FragmentStatePagerAdapter {
 
     private List<AppFragment> pages;
 
@@ -51,23 +51,9 @@ public class DesktopPageAdapter extends FragmentPagerAdapter {
         return super.getItemPosition(object);
     }
 
-    public void removeApp(String packageName) {
-        AppFragment.apps.remove(packageName);
-        for (AppFragment fr : pages) {
-            fr.removeApp(packageName);
+    public void updateDate(Map<String, ApplicationDB> apps, List<ApplicationDB> appsDesktop) {
+        for (AppFragment fragment : pages) {
+            fragment.setData(apps, appsDesktop);
         }
-    }
-
-    public void addApp(ResolveInfo info) {
-        AppFragment.apps.put(info.activityInfo.applicationInfo.packageName, new ApplicationDB(info));
-        for (AppFragment fr : pages) {
-            fr.addApp(info.activityInfo.applicationInfo.packageName);
-        }
-    }
-
-    @Override
-    public Parcelable saveState() {
-        AppFragment.saveState();
-        return super.saveState();
     }
 }

@@ -7,15 +7,16 @@
         android:id="@+id/vpHello"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/rgPage"/>
+        android:layout_above="@id/rgPage" />
 
-    <RadioGroup
+    <by.md.gornak.homework.view.PageIndicatorView
         android:id="@+id/rgPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal|bottom"
         android:layout_margin="@dimen/large_font"
+        android:gravity="center_horizontal|bottom"
         android:orientation="horizontal" />
+    />
 
 </RelativeLayout>

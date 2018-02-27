@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "339277365584",
+    "firebase_url": "https://launcher-90720.firebaseio.com",
+    "project_id": "launcher-90720",
+    "storage_bucket": "launcher-90720.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339277365584:android:5faa34efd2bfa306",
+        "android_client_info": {
+          "package_name": "by.md.gornak.homework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339277365584-q9obb6og7a8no994kmopujgs1jkopgtl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHXt8XzS0FBC9j2ZLfFqhEBuDQaGoDAvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

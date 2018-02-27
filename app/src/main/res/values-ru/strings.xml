@@ -121,6 +121,7 @@
     <string name="pref_key_light_theme">isLightTheme</string>
     <string name="pref_key_sorting">sorting</string>
     <string name="pref_key_first_start">isFirstStart</string>
+    <string name="pref_key_news" translatable="false">news</string>
 
     <string name="desktop_done">Приложение добавлено на рабочий стол</string>
     <string name="desktop_error">Рабочий стол уже полон</string>

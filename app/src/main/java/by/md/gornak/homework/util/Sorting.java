@@ -11,11 +11,11 @@ import by.md.gornak.homework.model.ApplicationDB;
 
 public class Sorting {
 
-    private static final String DATE = "0";
-    private static final String AZ = "1";
-    private static final String ZA = "2";
-    private static final String START = "3";
-    private static final String NONE = "4";
+    public static final String DATE = "0";
+    public static final String AZ = "1";
+    public static final String ZA = "2";
+    public static final String START = "3";
+    public static final String NONE = "4";
 
 
     public static Comparator getComparable(Context context) {
@@ -52,7 +52,13 @@ public class Sorting {
                         .getPackageInfo(b.getAppPackage(), 0)
                         .firstInstallTime;
 
-                return (int) (second - first);
+                if(second > first) {
+                    return 1;
+                } else if(first > second) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             } catch (PackageManager.NameNotFoundException e) {
                 return 0;
             }
