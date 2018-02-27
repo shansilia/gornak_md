@@ -61,8 +61,8 @@ public class UIStartActivityTest {
 
     @Test
     public void changeTheme() {
-        onView(withId(R.id.vpHello)).perform(swipeLeft()).perform(swipeLeft());
-        onView(withId(R.id.darkThemeRb)).check(matches(isDisplayed()));
+        onView(withId(R.id.vpHello)).perform(swipeLeft());
+        SystemClock.sleep(1000);
         onView(withId(R.id.darkThemeRb)).perform(click());
         onView(withId(R.id.lightThemeRb)).check(matches(isNotChecked()));
         onView(withId(R.id.darkThemeRb)).check(matches(isChecked()));
@@ -80,8 +80,9 @@ public class UIStartActivityTest {
     @Test
     public void clickNextButton() {
         onView(withId(R.id.vpHello)).perform(swipeLeft()).perform(swipeLeft());
+        SystemClock.sleep(1000);
 
         onView(withId(R.id.nextButton)).perform(click());
-        onView(withId(R.id.vpHello)).check(matches(isDisplayed()));
+        onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
     }
 }

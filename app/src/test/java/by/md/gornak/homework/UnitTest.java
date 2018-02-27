@@ -33,24 +33,24 @@ public class UnitTest {
 
     private Context context = Robolectric.buildActivity(LauncherActivity.class).get();
 
-    private String test;
     private SharedPreferences sharedPreferences;
 
     @Before
     public void start() {
-        test = "test";
         sharedPreferences =
                 context.getSharedPreferences(context.getString(R.string.shared_preferences), Context.MODE_PRIVATE);
     }
 
     @Test
     public void saveStringPref() {
+        String test = "true";
         Settings.setStringValue(context, R.string.pref_key_layout, test);
         assertEquals(test, sharedPreferences.getString(context.getString(R.string.pref_key_layout), null));
     }
 
     @Test
     public void getStringPref() {
+        String test = "true";
         sharedPreferences.edit().putString(context.getString(R.string.pref_key_layout), test).commit();
         String buffer = Settings.getStringValue(context, R.string.pref_key_layout);
         assertEquals(buffer, test);
